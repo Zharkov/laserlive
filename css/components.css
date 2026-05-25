@@ -601,14 +601,14 @@ body.loading {
   height: 100%;
   border: 0;
   display: block;
-  filter: invert(0.92) hue-rotate(180deg) saturate(0.8);
 }
 .contact-map::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 60px rgba(255, 61, 143, 0.15);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 0 1px rgba(255, 158, 201, 0.2);
 }
 
 /* ===== КОНФЕТТИ ===== */
@@ -618,6 +618,485 @@ body.loading {
   z-index: 9998;
   pointer-events: none;
 }
+
+/* ===== КАЛЬКУЛЯТОР ===== */
+.calculator {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 158, 201, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.calculator::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 61, 143, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.calc-zones {
+  position: relative;
+  z-index: 1;
+}
+
+.calc-group {
+  margin-bottom: 28px;
+}
+.calc-group:last-child { margin-bottom: 0; }
+
+.calc-group-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink-900);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.calc-group-title::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.calc-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+/* Стилизованный чекбокс */
+.calc-option {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+.calc-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.calc-option-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid rgba(255, 158, 201, 0.3);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--ink-700);
+  transition: all 0.25s var(--ease-smooth);
+  gap: 8px;
+}
+.calc-option-label::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1.5px solid var(--pink-300);
+  flex-shrink: 0;
+  background: var(--white);
+  transition: all 0.25s;
+  position: relative;
+}
+.calc-option input:checked + .calc-option-label {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -6px var(--pink-500);
+}
+.calc-option input:checked + .calc-option-label::before {
+  background: var(--white);
+  border-color: var(--white);
+}
+.calc-option input:checked + .calc-option-label::after {
+  content: '';
+  position: absolute;
+  left: 22px;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--pink-600);
+  border-bottom: 2px solid var(--pink-600);
+  transform: rotate(-45deg) translateY(-2px);
+}
+.calc-option-text {
+  flex: 1;
+  text-align: left;
+}
+.calc-option-price {
+  font-weight: 600;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.calc-option:hover .calc-option-label {
+  border-color: var(--pink-400);
+}
+
+/* Тумблер «Женская / Мужская» */
+.calc-gender {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid var(--pink-200);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  margin-bottom: 28px;
+}
+.calc-gender button {
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-500);
+  transition: all 0.3s;
+  font-family: var(--font-body);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.calc-gender button.active {
+  background: var(--gradient-primary);
+  color: var(--white);
+  box-shadow: 0 6px 18px -6px var(--pink-500);
+}
+
+/* Сводка справа */
+.calc-summary {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  background: linear-gradient(135deg, var(--ink-900) 0%, #2a1322 100%);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(26, 11, 20, 0.4);
+}
+.calc-summary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 61, 143, 0.18) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.calc-summary > * { position: relative; z-index: 1; }
+
+.calc-summary-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.calc-selected-list {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  padding-right: 6px;
+}
+.calc-selected-list::-webkit-scrollbar { width: 4px; }
+.calc-selected-list::-webkit-scrollbar-thumb {
+  background: var(--pink-500);
+  border-radius: 2px;
+}
+
+.calc-selected-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  gap: 12px;
+}
+.calc-selected-item:last-child { border-bottom: none; }
+.calc-selected-name {
+  opacity: 0.85;
+  flex: 1;
+}
+.calc-selected-price {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.calc-empty {
+  text-align: center;
+  padding: 30px 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.calc-totals {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+.calc-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+.calc-total-row.discount {
+  color: var(--pink-300);
+  opacity: 1;
+}
+.calc-total-row.final {
+  margin-top: 16px;
+  margin-bottom: 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 16px;
+  opacity: 1;
+}
+.calc-total-row.final .calc-total-value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--pink-300), var(--violet-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.calc-cta {
+  margin-top: 24px;
+  width: 100%;
+  padding: 16px;
+  background: var(--gradient-primary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.calc-cta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px var(--pink-500);
+}
+.calc-cta:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.calc-hint {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 12px;
+}
+
+/* ===== ОТЗЫВЫ ===== */
+.reviews-wrap {
+  position: relative;
+  margin-top: 40px;
+}
+
+.reviews-track-container {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 8px 0;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.6s var(--ease-smooth);
+  will-change: transform;
+}
+
+.review-card {
+  flex: 0 0 calc(33.333% - 16px);
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 158, 201, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.review-card::before {
+  content: '“';
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  font-family: var(--font-display);
+  font-size: 140px;
+  color: var(--pink-200);
+  opacity: 0.5;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--pink-400);
+  box-shadow: var(--shadow-soft);
+}
+
+.review-stars {
+  display: flex;
+  gap: 4px;
+  color: var(--gold);
+  font-size: 18px;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.review-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-700);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 158, 201, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
+.review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.review-meta-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink-900);
+}
+
+.review-meta-date {
+  font-size: 12px;
+  color: var(--ink-500);
+  margin-top: 2px;
+}
+
+/* Управление каруселью */
+.reviews-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.reviews-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--pink-300);
+  color: var(--pink-600);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.reviews-arrow:hover:not(:disabled) {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: var(--white);
+  transform: scale(1.08);
+}
+.reviews-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.reviews-dots {
+  display: flex;
+  gap: 8px;
+  margin: 0 12px;
+}
+.reviews-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pink-200);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.reviews-dot.active {
+  background: var(--gradient-primary);
+  width: 32px;
+  border-radius: 100px;
+}
+
+/* Ссылка «все отзывы» */
+.reviews-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+.reviews-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--pink-600);
+  font-weight: 600;
+  font-size: 15px;
+  transition: gap 0.3s;
+}
+.reviews-cta a:hover { gap: 14px; }
 
 /* ===== ПЛАВАЮЩАЯ КНОПКА WHATSAPP ===== */
 .fab {

@@ -114,9 +114,9 @@
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#about">О мастере</a>
-      <a href="#benefits">Преимущества</a>
       <a href="#prices">Цены</a>
-      <a href="#promo">Акции</a>
+      <a href="#calc">Калькулятор</a>
+      <a href="#reviews">Отзывы</a>
       <a href="#faq">Вопросы</a>
       <a href="#contact" class="nav-cta">Записаться</a>
     </div>
@@ -368,7 +368,154 @@
     </div>
   </section>
 
-  <!-- ============ АКЦИИ ============ -->
+  <!-- ============ КАЛЬКУЛЯТОР ============ -->
+  <section id="calc" class="reveal">
+    <div class="container">
+      <div class="section-label">калькулятор</div>
+      <h2 class="section-title">Посчитай <em>свою стоимость</em></h2>
+      <p class="section-sub">Отметь зоны, которые тебя интересуют — увидишь итог со скидкой и сможешь сразу записаться</p>
+
+      <div class="calculator" id="calculator">
+
+        <!-- ===== Слева: выбор зон ===== -->
+        <div class="calc-zones">
+
+          <!-- Переключатель пола -->
+          <div class="calc-gender">
+            <button class="active" data-gender="women">Женская</button>
+            <button data-gender="men">Мужская</button>
+          </div>
+
+          <!-- ===== ЖЕНСКАЯ ===== -->
+          <div data-gender-block="women">
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Зона лица</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Лоб" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Лоб</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Бакенбарды" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Бакенбарды</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Щёки" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Щёки</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Подбородок" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Подбородок</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Верхняя губа" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Верхняя губа</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Лицо полностью" data-price="1200"><span class="calc-option-label"><span class="calc-option-text">Лицо полностью</span><span class="calc-option-price">1200 ₽</span></span></label>
+              </div>
+            </div>
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Зона рук</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Руки до локтя" data-price="900"><span class="calc-option-label"><span class="calc-option-text">До локтя</span><span class="calc-option-price">900 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Руки выше локтя" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Выше локтя</span><span class="calc-option-price">900 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Руки полностью" data-price="1700"><span class="calc-option-label"><span class="calc-option-text">Полностью</span><span class="calc-option-price">1700 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Кисти рук" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Кисти</span><span class="calc-option-price">350 ₽</span></span></label>
+              </div>
+            </div>
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Зона ног</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Голени" data-price="1200"><span class="calc-option-label"><span class="calc-option-text">Голени</span><span class="calc-option-price">1200 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Бёдра" data-price="1500"><span class="calc-option-label"><span class="calc-option-text">Бёдра</span><span class="calc-option-price">1500 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Ноги полностью" data-price="2600"><span class="calc-option-label"><span class="calc-option-text">Полностью</span><span class="calc-option-price">2600 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Пальцы и стопы" data-price="300"><span class="calc-option-label"><span class="calc-option-text">Пальцы и стопы</span><span class="calc-option-price">300 ₽</span></span></label>
+              </div>
+            </div>
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Интимные зоны</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Бикини классическое" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Классическое</span><span class="calc-option-price">900 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Бикини тотальное" data-price="1200"><span class="calc-option-label"><span class="calc-option-text">Тотальное</span><span class="calc-option-price">1200 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Ягодицы" data-price="1000"><span class="calc-option-label"><span class="calc-option-text">Ягодицы</span><span class="calc-option-price">1000 ₽</span></span></label>
+              </div>
+            </div>
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Зона тела</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Шея" data-price="500"><span class="calc-option-label"><span class="calc-option-text">Шея</span><span class="calc-option-price">500 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Декольте" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Декольте</span><span class="calc-option-price">900 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Ареолы" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Ареолы</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Подмышечные впадины" data-price="800"><span class="calc-option-label"><span class="calc-option-text">Подмышки</span><span class="calc-option-price">800 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Белая линия живота" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Белая линия</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Живот полностью" data-price="1000"><span class="calc-option-label"><span class="calc-option-text">Живот</span><span class="calc-option-price">1000 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Поясница" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Поясница</span><span class="calc-option-price">900 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Спина полностью" data-price="1700"><span class="calc-option-label"><span class="calc-option-text">Спина</span><span class="calc-option-price">1700 ₽</span></span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== МУЖСКАЯ ===== -->
+          <div data-gender-block="men" style="display:none">
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Зона лица</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Лоб" data-price="400"><span class="calc-option-label"><span class="calc-option-text">Лоб</span><span class="calc-option-price">400 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Бакенбарды" data-price="400"><span class="calc-option-label"><span class="calc-option-text">Бакенбарды</span><span class="calc-option-price">400 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Щёки" data-price="450"><span class="calc-option-label"><span class="calc-option-text">Щёки</span><span class="calc-option-price">450 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Подбородок" data-price="450"><span class="calc-option-label"><span class="calc-option-text">Подбородок</span><span class="calc-option-price">450 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Верхняя губа" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Верхняя губа</span><span class="calc-option-price">350 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Лицо полностью" data-price="1800"><span class="calc-option-label"><span class="calc-option-text">Лицо полностью</span><span class="calc-option-price">1800 ₽</span></span></label>
+              </div>
+            </div>
+
+            <div class="calc-group">
+              <h3 class="calc-group-title">Зона тела</h3>
+              <div class="calc-options">
+                <label class="calc-option"><input type="checkbox" data-zone="Шея" data-price="650"><span class="calc-option-label"><span class="calc-option-text">Шея</span><span class="calc-option-price">650 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Плечи" data-price="600"><span class="calc-option-label"><span class="calc-option-text">Плечи</span><span class="calc-option-price">600 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Поясница" data-price="1000"><span class="calc-option-label"><span class="calc-option-text">Поясница</span><span class="calc-option-price">1000 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Спина полностью" data-price="1700"><span class="calc-option-label"><span class="calc-option-text">Спина</span><span class="calc-option-price">1700 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Грудь" data-price="800"><span class="calc-option-label"><span class="calc-option-text">Грудь</span><span class="calc-option-price">800 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Белая линия живота" data-price="500"><span class="calc-option-label"><span class="calc-option-text">Белая линия</span><span class="calc-option-price">500 ₽</span></span></label>
+                <label class="calc-option"><input type="checkbox" data-zone="Живот полностью" data-price="1100"><span class="calc-option-label"><span class="calc-option-text">Живот</span><span class="calc-option-price">1100 ₽</span></span></label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== Справа: сводка ===== -->
+        <aside class="calc-summary">
+          <div class="calc-summary-title">Твой расчёт</div>
+
+          <!-- Тариф -->
+          <div class="calc-gender" data-summary="plan" style="margin-bottom: 20px; width:100%; display:flex">
+            <button class="active" data-discount="30" data-label="первое посещение −30%" style="flex:1">Первый раз −30%</button>
+            <button data-discount="15" data-label="абонемент на 5 процедур −15%" style="flex:1">Абонемент −15%</button>
+            <button data-discount="0" data-label="обычная цена" style="flex:1">Обычная</button>
+          </div>
+
+          <div class="calc-selected-list">
+            <div class="calc-empty">Выберите зоны слева, чтобы увидеть итог</div>
+          </div>
+
+          <div class="calc-totals">
+            <div class="calc-total-row">
+              <span class="calc-total-label">Сумма без скидки</span>
+              <span class="calc-total-value" data-summary="subtotal">0 ₽</span>
+            </div>
+            <div class="calc-total-row discount" data-summary="discount-row" style="display:none">
+              <span class="calc-total-label">Скидка</span>
+              <span class="calc-total-value" data-summary="discount">0 ₽</span>
+            </div>
+            <div class="calc-total-row final">
+              <span class="calc-total-label">К оплате</span>
+              <span class="calc-total-value" data-summary="final">0 ₽</span>
+            </div>
+          </div>
+
+          <button class="calc-cta" disabled>
+            <span>Записаться по этому расчёту</span>
+            <span>→</span>
+          </button>
+          <p class="calc-hint">Расчёт уйдёт в WhatsApp вместе с заявкой</p>
+        </aside>
+
+      </div>
+    </div>
+  </section>
   <section id="promo" class="reveal" style="padding-left: 0; padding-right: 0;">
     <div class="promo-section">
       <div class="section-label">🎉 акции и скидки</div>
@@ -396,6 +543,111 @@
         </div>
       </div>
       <p class="promo-note">*скидки между собой не суммируются</p>
+    </div>
+  </section>
+
+  <!-- ============ ОТЗЫВЫ ============ -->
+  <section id="reviews" class="reveal">
+    <div class="container">
+      <div class="section-label">отзывы клиентов</div>
+      <h2 class="section-title">Что говорят <em>о нас</em></h2>
+      <p class="section-sub">Реальные отзывы с Яндекс.Карт. Спасибо каждой за доверие 💖</p>
+
+      <div class="reviews-wrap">
+        <div class="reviews-track-container">
+          <div class="reviews-track">
+
+            <!-- Отзыв 1 -->
+            <article class="review-card">
+              <div class="review-stars" aria-label="5 из 5">★★★★★</div>
+              <p class="review-text">Ходила к Кате на эпиляцию подмышек и бикини. Очень комфортно, не больно, и кабинет уютный, прямо приятно находиться. Чувствуется, что мастер любит свою работу. Уже после первой процедуры волосы стали расти заметно реже!</p>
+              <div class="review-author">
+                <div class="review-avatar">А</div>
+                <div>
+                  <div class="review-meta-name">Анастасия</div>
+                  <div class="review-meta-date">Яндекс.Карты</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Отзыв 2 -->
+            <article class="review-card">
+              <div class="review-stars" aria-label="5 из 5">★★★★★</div>
+              <p class="review-text">Долго не решалась, но Катя сразу всё подробно рассказала: подготовка, противопоказания, как ухаживать после. Прошла уже 4 процедуры — результат супер. Рекомендую всем девочкам Вязьмы, наконец-то у нас появилась хорошая студия!</p>
+              <div class="review-author">
+                <div class="review-avatar">Е</div>
+                <div>
+                  <div class="review-meta-name">Елена</div>
+                  <div class="review-meta-date">Яндекс.Карты</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Отзыв 3 -->
+            <article class="review-card">
+              <div class="review-stars" aria-label="5 из 5">★★★★★</div>
+              <p class="review-text">Хочу сказать огромное спасибо! Делала эпиляцию ног и зоны бикини. Никаких раздражений, никакой боли — реально ощущения как лёгкое тепло. Цены адекватные, есть скидки. Буду ходить курсом, всем советую 🌸</p>
+              <div class="review-author">
+                <div class="review-avatar">М</div>
+                <div>
+                  <div class="review-meta-name">Мария</div>
+                  <div class="review-meta-date">Яндекс.Карты</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Отзыв 4 -->
+            <article class="review-card">
+              <div class="review-stars" aria-label="5 из 5">★★★★★</div>
+              <p class="review-text">Катерина — настоящий профессионал. Сразу видно, что человек подходит к делу с душой и знаниями. После 3 процедур пушок на лице практически исчез. Атмосфера расслабляющая, всегда предложит чай. Однозначно мой постоянный мастер!</p>
+              <div class="review-author">
+                <div class="review-avatar">О</div>
+                <div>
+                  <div class="review-meta-name">Ольга</div>
+                  <div class="review-meta-date">Яндекс.Карты</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Отзыв 5 -->
+            <article class="review-card">
+              <div class="review-stars" aria-label="5 из 5">★★★★★</div>
+              <p class="review-text">Записывалась с подругой по акции — было выгодно вдвоём. Сделали голени и бикини. Боли вообще никакой, я была удивлена. Кабинет чистый, всё стерильно, есть всё что нужно. Катя приветливая и грамотная, обсудили все нюансы.</p>
+              <div class="review-author">
+                <div class="review-avatar">К</div>
+                <div>
+                  <div class="review-meta-name">Кристина</div>
+                  <div class="review-meta-date">Яндекс.Карты</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Отзыв 6 -->
+            <article class="review-card">
+              <div class="review-stars" aria-label="5 из 5">★★★★★</div>
+              <p class="review-text">Прошла полный курс — 8 процедур. Результат превзошёл все ожидания! Волос почти нет, и те что остались — совсем тонкие и светлые. Никакого раздражения, как было после станка. Теперь время есть на нормальные дела, а не на бритьё каждые 2 дня 😍</p>
+              <div class="review-author">
+                <div class="review-avatar">Ю</div>
+                <div>
+                  <div class="review-meta-name">Юлия</div>
+                  <div class="review-meta-date">Яндекс.Карты</div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="reviews-controls">
+          <button class="reviews-arrow prev" aria-label="Предыдущий отзыв">‹</button>
+          <div class="reviews-dots" role="tablist"></div>
+          <button class="reviews-arrow next" aria-label="Следующий отзыв">›</button>
+        </div>
+
+        <div class="reviews-cta">
+          <a href="https://yandex.ru/maps/org/laser_live/25308369377/reviews/" target="_blank" rel="noopener">Все отзывы на Яндекс.Картах →</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -486,10 +738,10 @@
         </div>
       </div>
 
-      <!-- Яндекс.Карта -->
+      <!-- Яндекс.Карта с меткой студии -->
       <div class="contact-map">
         <iframe
-          src="https://yandex.ru/map-widget/v1/?ll=34.297778%2C55.211389&mode=search&sctx=ZAAAAAgBEAAaKAoSCYj%2BBgAAQEFAEZ%2BJBwAAQEpAEhIJAAAAAAAA8L8RAAAAAAAA8L8iBgABAgMEBQYoCjAAOM3I&sll=34.297778%2C55.211389&sspn=0.01%2C0.01&text=%D0%92%D1%8F%D0%B7%D1%8C%D0%BC%D0%B0%20%D1%83%D0%BB%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2014%D0%B1&z=16"
+          src="https://yandex.ru/map-widget/v1/?ll=34.298316%2C55.211692&mode=search&oid=25308369377&ol=biz&z=17"
           allowfullscreen="true"
           loading="lazy"
           title="LaserLive на Яндекс.Картах — Вязьма, ул. Ленина 14б"
@@ -521,6 +773,8 @@
   <script src="js/parallax.js" defer></script>
   <script src="js/active-nav.js" defer></script>
   <script src="js/confetti.js" defer></script>
+  <script src="js/calculator.js" defer></script>
+  <script src="js/reviews.js" defer></script>
   <script src="js/form.js" defer></script>
 
 </body>
