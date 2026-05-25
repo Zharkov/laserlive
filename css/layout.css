@@ -66,6 +66,14 @@
 .nav-links a:hover { color: var(--pink-600); }
 .nav-links a:hover::after { width: 100%; }
 
+/* Активный пункт меню (когда скроллишь до его секции) */
+.nav-links a.active:not(.nav-cta) {
+  color: var(--pink-600);
+}
+.nav-links a.active:not(.nav-cta)::after {
+  width: 100%;
+}
+
 .nav-cta {
   padding: 10px 22px;
   background: var(--gradient-primary);
@@ -520,6 +528,9 @@ section {
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .complex-grid  { grid-template-columns: repeat(2, 1fr); }
   .price-list    { grid-template-columns: 1fr; }
+  .stats-grid    { grid-template-columns: 1fr; gap: 16px; }
+  .stat-card     { padding: 32px 24px; }
+  .contact-map   { height: 280px; }
   section        { padding: 70px 24px; }
   .promo-section { padding: 60px 28px; margin: 0 16px; }
   .nav           { padding: 14px 20px; }

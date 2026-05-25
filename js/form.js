@@ -1,6 +1,7 @@
 /**
  * FORM — обработка формы заявки.
- * Открывает WhatsApp с готовым сообщением.
+ * При успешной отправке: запускает конфетти и открывает WhatsApp
+ * с готовым сообщением.
  */
 (function () {
   'use strict';
@@ -23,12 +24,25 @@
       return;
     }
 
+    // Конфетти из координат кнопки отправки
+    if (window.LaserConfetti) {
+      const button = form.querySelector('button[type="submit"]');
+      const rect = button.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      window.LaserConfetti.fire(x, y, 100);
+    }
+
     const text =
       `Здравствуйте! Меня зовут ${name}, телефон ${phone}.` +
       (message ? ` ${message}` : '') +
       ' Хочу записаться на процедуру.';
 
     const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener');
+
+    // Небольшая задержка чтобы пользователь увидел конфетти
+    setTimeout(() => {
+      window.open(url, '_blank', 'noopener');
+    }, 600);
   });
 })();
