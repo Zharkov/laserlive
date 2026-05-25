@@ -1,0 +1,77 @@
+/* ===================================
+   BASE — типографика и фоновая среда
+   =================================== */
+body {
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  background: var(--cream);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Анимированный градиентный фон */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 20% 10%, var(--pink-200) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, var(--lavender-300) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 80%, var(--peach-300) 0%, transparent 50%),
+    radial-gradient(ellipse at 10% 90%, var(--pink-300) 0%, transparent 45%),
+    linear-gradient(180deg, var(--cream) 0%, #fff0f7 100%);
+}
+
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: -1;
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+.bg-blob.a { width: 500px; height: 500px; top: -10%;  left: -10%;   background: var(--pink-300); }
+.bg-blob.b { width: 600px; height: 600px; top: 30%;   right: -15%;  background: var(--violet-400); animation-delay: -7s; }
+.bg-blob.c { width: 450px; height: 450px; bottom: -10%; left: 20%;  background: var(--peach-300); animation-delay: -14s; }
+
+/* Общий контейнер */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Заголовки секций — переиспользуемые */
+.section-label {
+  font-family: var(--font-script);
+  font-size: 32px;
+  color: var(--pink-600);
+  text-align: center;
+  margin-bottom: 8px;
+  transform: rotate(-1deg);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.section-title em {
+  font-style: italic;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--ink-500);
+  max-width: 600px;
+  margin: 0 auto 60px;
+  font-size: 17px;
+}

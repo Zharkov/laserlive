@@ -1,0 +1,450 @@
+/* ===================================
+   COMPONENTS — переиспользуемые элементы
+   =================================== */
+
+/* ===== КНОПКИ ===== */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--white);
+  box-shadow: 0 12px 32px -8px var(--pink-500);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--violet-500), var(--coral-400));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.btn-primary > * { position: relative; z-index: 1; }
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px -8px var(--pink-500);
+}
+.btn-primary:hover::before { opacity: 1; }
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink-900);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid var(--pink-300);
+}
+.btn-secondary:hover {
+  background: var(--white);
+  border-color: var(--pink-500);
+  transform: translateY(-3px);
+}
+
+/* ===== БЕЙДЖ (hero-eyebrow) ===== */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 61, 143, 0.2);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pink-700);
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pink-500);
+  box-shadow: 0 0 12px var(--pink-500);
+  animation: pulse 2s infinite;
+}
+
+/* ===== БЛЁСТКИ ===== */
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  animation: sparkle 3s infinite;
+  pointer-events: none;
+}
+.sparkle.s1 { top: 20%; left: 15%;  animation-delay: 0s; }
+.sparkle.s2 { top: 30%; right: 20%; animation-delay: 1s; }
+.sparkle.s3 { bottom: 30%; left: 25%; animation-delay: 2s; }
+.sparkle.s4 { top: 60%; right: 15%; animation-delay: 1.5s; }
+.sparkle.s5 { top: 50%; left: 10%;  animation-delay: 0.5s; width: 12px; height: 12px; }
+
+/* ===== БЕГУЩАЯ СТРОКА ===== */
+.marquee {
+  background: linear-gradient(90deg, var(--pink-500), var(--violet-500), var(--coral-400), var(--pink-500));
+  background-size: 300% 100%;
+  padding: 22px 0;
+  overflow: hidden;
+  position: relative;
+  animation: gradientShift 8s ease infinite;
+  transform: rotate(-1.5deg);
+  margin: 40px -20px;
+}
+.marquee-track {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+.marquee-item {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.marquee-item::after {
+  content: '✦';
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+/* ===== КАРТОЧКА ПРЕИМУЩЕСТВ ===== */
+.benefit {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 158, 201, 0.3);
+  border-radius: var(--radius-md);
+  padding: 36px 28px;
+  transition: all 0.5s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+}
+.benefit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: -1;
+}
+.benefit:hover {
+  transform: translateY(-8px);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: var(--shadow-strong);
+}
+.benefit:hover::before { opacity: 1; }
+.benefit:hover .benefit-num,
+.benefit:hover h3,
+.benefit:hover p { color: var(--white); }
+
+.benefit-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 56px;
+  font-weight: 500;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  margin-bottom: 20px;
+  transition: color 0.5s;
+}
+.benefit h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--ink-900);
+  transition: color 0.5s;
+}
+.benefit p {
+  font-size: 14px;
+  color: var(--ink-500);
+  line-height: 1.6;
+  transition: color 0.5s;
+}
+
+/* ===== ТАБЫ ПРАЙСА ===== */
+.price-tab {
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid var(--pink-200);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink-700);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+}
+.price-tab.active {
+  background: var(--gradient-primary);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: 0 8px 20px -6px var(--pink-500);
+}
+.price-tab:hover:not(.active) {
+  border-color: var(--pink-400);
+  transform: translateY(-2px);
+}
+
+/* ===== ЭЛЕМЕНТ ПРАЙСА ===== */
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 158, 201, 0.25);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+}
+.price-item:hover {
+  transform: translateX(6px);
+  border-color: var(--pink-400);
+  background: var(--white);
+  box-shadow: 0 10px 30px -10px var(--pink-400);
+}
+.price-item-name {
+  font-size: 15px;
+  color: var(--ink-900);
+  font-weight: 500;
+}
+.price-item-cost {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+/* ===== КАРТОЧКИ КОМПЛЕКСОВ ===== */
+.complex-card {
+  padding: 32px 24px;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+  transition: transform 0.4s;
+}
+.complex-card:hover { transform: translateY(-8px) scale(1.02); }
+.complex-card.xs { background: linear-gradient(135deg, #ffb3c6, #ff8fab); }
+.complex-card.s  { background: linear-gradient(135deg, var(--pink-400), var(--pink-600)); }
+.complex-card.m  { background: linear-gradient(135deg, var(--violet-400), var(--pink-500)); }
+.complex-card.l  { background: linear-gradient(135deg, var(--violet-500), var(--coral-400)); }
+
+.complex-size {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.complex-desc {
+  font-size: 13px;
+  opacity: 0.95;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.complex-price {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* ===== АКЦИОННЫЕ КАРТОЧКИ ===== */
+.promo-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.4s;
+}
+.promo-card:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-6px);
+}
+.promo-discount {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.promo-label {
+  font-size: 14px;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* ===== FAQ ===== */
+.faq-item {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 158, 201, 0.3);
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.faq-item:hover { border-color: var(--pink-400); }
+.faq-item.open {
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+.faq-q {
+  padding: 22px 28px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink-900);
+  user-select: none;
+}
+.faq-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 300;
+  transition: transform 0.4s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0 28px;
+}
+.faq-item.open .faq-a {
+  max-height: 500px;
+  padding: 0 28px 22px;
+}
+.faq-a p {
+  color: var(--ink-700);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ===== ФОРМА ===== */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 15px;
+  margin-bottom: 14px;
+  font-family: var(--font-body);
+  transition: all 0.3s;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--pink-400);
+  background: rgba(255, 255, 255, 0.12);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.contact-form button {
+  width: 100%;
+  padding: 18px;
+  background: var(--gradient-primary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+  margin-top: 8px;
+}
+.contact-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px var(--pink-500);
+}
+.contact-form-note {
+  font-size: 12px;
+  opacity: 0.5;
+  text-align: center;
+  margin-top: 16px;
+  color: var(--white);
+}
+
+/* ===== ПЛАВАЮЩАЯ КНОПКА WHATSAPP ===== */
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+  z-index: 90;
+  transition: transform 0.3s;
+  animation: fab-pulse 3s infinite;
+}
+.fab:hover { transform: scale(1.1); }

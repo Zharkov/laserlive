@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://laserlive.ru/sitemap.xml
+Host: https://laserlive.ru

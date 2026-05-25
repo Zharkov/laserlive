@@ -1,0 +1,69 @@
+/* ===================================
+   ANIMATIONS — все @keyframes
+   =================================== */
+
+/* Плавающие блобы фона */
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(50px, -30px) scale(1.1); }
+  66%      { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+/* Появление снизу с прозрачностью */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Движущийся градиент */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* Пульсация (для индикатора онлайн) */
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* Мерцание блёсток */
+@keyframes sparkle {
+  0%, 100% { transform: scale(0) rotate(0deg);   opacity: 0; }
+  50%      { transform: scale(1) rotate(180deg); opacity: 1; }
+}
+
+/* Бегущая строка */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Плавающий значок */
+@keyframes float-icon {
+  0%, 100% { transform: translateY(0)    rotate(-5deg); }
+  50%      { transform: translateY(-15px) rotate(5deg); }
+}
+
+/* Орбита бликов */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Пульс кнопки WhatsApp */
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4); }
+  50%      { box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4), 0 0 0 20px rgba(37, 211, 102, 0); }
+}
+
+/* Появление при скролле — управляется JS */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
