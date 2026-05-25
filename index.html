@@ -372,150 +372,397 @@
   <section id="calc" class="reveal">
     <div class="container">
       <div class="section-label">калькулятор</div>
-      <h2 class="section-title">Посчитай <em>свою стоимость</em></h2>
-      <p class="section-sub">Отметь зоны, которые тебя интересуют — увидишь итог со скидкой и сможешь сразу записаться</p>
+      <h2 class="section-title">Собери <em>свой пакет</em></h2>
+      <p class="section-sub">Выбирай нужные зоны — стоимость со скидкой посчитается автоматически</p>
 
-      <div class="calculator" id="calculator">
+      <div class="calc-shell" id="calculator">
 
-        <!-- ===== Слева: выбор зон ===== -->
-        <div class="calc-zones">
+        <!-- ===== ЛЕВО: плитки ===== -->
+        <div class="calc-main">
 
-          <!-- Переключатель пола -->
-          <div class="calc-gender">
-            <button class="active" data-gender="women">Женская</button>
-            <button data-gender="men">Мужская</button>
+          <div class="calc-gender-switch" data-role="gender">
+            <button class="active" data-gender="women">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="4"/><path d="M12 10v8M9 14h6M9 21l3-3 3 3"/></svg>
+              Женская
+            </button>
+            <button data-gender="men">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><path d="m20 4-6 6M15 4h5v5"/></svg>
+              Мужская
+            </button>
           </div>
 
-          <!-- ===== ЖЕНСКАЯ ===== -->
+          <!-- ============================ -->
+          <!-- ЖЕНСКАЯ                       -->
+          <!-- ============================ -->
           <div data-gender-block="women">
 
+            <!-- ЛИЦО -->
             <div class="calc-group">
-              <h3 class="calc-group-title">Зона лица</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Лоб" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Лоб</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Бакенбарды" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Бакенбарды</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Щёки" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Щёки</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Подбородок" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Подбородок</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Верхняя губа" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Верхняя губа</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Лицо полностью" data-price="1200"><span class="calc-option-label"><span class="calc-option-text">Лицо полностью</span><span class="calc-option-price">1200 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                </div>
+                <h3 class="calc-group-title">Лицо</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Лоб" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Лоб</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Бакенбарды" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Бакенбарды</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Щёки" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Щёки</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Подбородок" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Подбородок</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Верхняя губа" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Верхняя губа</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Лицо полностью" data-price="1200">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Лицо полностью</div>
+                    <div class="calc-tile-price">1 200 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
               </div>
             </div>
 
+            <!-- РУКИ -->
             <div class="calc-group">
-              <h3 class="calc-group-title">Зона рук</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Руки до локтя" data-price="900"><span class="calc-option-label"><span class="calc-option-text">До локтя</span><span class="calc-option-price">900 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Руки выше локтя" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Выше локтя</span><span class="calc-option-price">900 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Руки полностью" data-price="1700"><span class="calc-option-label"><span class="calc-option-text">Полностью</span><span class="calc-option-price">1700 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Кисти рук" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Кисти</span><span class="calc-option-price">350 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+                </div>
+                <h3 class="calc-group-title">Руки</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Руки до локтя" data-price="900">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">До локтя</div>
+                    <div class="calc-tile-price">900 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Руки выше локтя" data-price="900">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Выше локтя</div>
+                    <div class="calc-tile-price">900 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Руки полностью" data-price="1700">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Полностью</div>
+                    <div class="calc-tile-price">1 700 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Кисти рук" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Кисти</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
               </div>
             </div>
 
+            <!-- НОГИ -->
             <div class="calc-group">
-              <h3 class="calc-group-title">Зона ног</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Голени" data-price="1200"><span class="calc-option-label"><span class="calc-option-text">Голени</span><span class="calc-option-price">1200 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Бёдра" data-price="1500"><span class="calc-option-label"><span class="calc-option-text">Бёдра</span><span class="calc-option-price">1500 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Ноги полностью" data-price="2600"><span class="calc-option-label"><span class="calc-option-text">Полностью</span><span class="calc-option-price">2600 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Пальцы и стопы" data-price="300"><span class="calc-option-label"><span class="calc-option-text">Пальцы и стопы</span><span class="calc-option-price">300 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v10l-2 8 3 2 2-9 2 9 3-2-2-8V2"/></svg>
+                </div>
+                <h3 class="calc-group-title">Ноги</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Голени" data-price="1200">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Голени</div>
+                    <div class="calc-tile-price">1 200 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Бёдра" data-price="1500">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Бёдра</div>
+                    <div class="calc-tile-price">1 500 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Ноги полностью" data-price="2600">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Ноги полностью</div>
+                    <div class="calc-tile-price">2 600 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Пальцы и стопы" data-price="300">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Пальцы и стопы</div>
+                    <div class="calc-tile-price">300 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
               </div>
             </div>
 
+            <!-- ИНТИМНЫЕ -->
             <div class="calc-group">
-              <h3 class="calc-group-title">Интимные зоны</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Бикини классическое" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Классическое</span><span class="calc-option-price">900 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Бикини тотальное" data-price="1200"><span class="calc-option-label"><span class="calc-option-text">Тотальное</span><span class="calc-option-price">1200 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Ягодицы" data-price="1000"><span class="calc-option-label"><span class="calc-option-text">Ягодицы</span><span class="calc-option-price">1000 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5-7-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 7-7 12-7 12-1 1-3 1-4 0z"/></svg>
+                </div>
+                <h3 class="calc-group-title">Интимные зоны</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Бикини классическое" data-price="900">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Бикини классическое</div>
+                    <div class="calc-tile-price">900 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Бикини тотальное" data-price="1200">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Бикини тотальное</div>
+                    <div class="calc-tile-price">1 200 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Ягодицы" data-price="1000">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Ягодицы</div>
+                    <div class="calc-tile-price">1 000 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
               </div>
             </div>
 
+            <!-- ТЕЛО -->
             <div class="calc-group">
-              <h3 class="calc-group-title">Зона тела</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Шея" data-price="500"><span class="calc-option-label"><span class="calc-option-text">Шея</span><span class="calc-option-price">500 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Декольте" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Декольте</span><span class="calc-option-price">900 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Ареолы" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Ареолы</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Подмышечные впадины" data-price="800"><span class="calc-option-label"><span class="calc-option-text">Подмышки</span><span class="calc-option-price">800 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Белая линия живота" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Белая линия</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Живот полностью" data-price="1000"><span class="calc-option-label"><span class="calc-option-text">Живот</span><span class="calc-option-price">1000 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Поясница" data-price="900"><span class="calc-option-label"><span class="calc-option-text">Поясница</span><span class="calc-option-price">900 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Спина полностью" data-price="1700"><span class="calc-option-label"><span class="calc-option-text">Спина</span><span class="calc-option-price">1700 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6 22V12c0-1 1-2 2-2h8c1 0 2 1 2 2v10"/></svg>
+                </div>
+                <h3 class="calc-group-title">Тело</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Шея" data-price="500">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Шея</div>
+                    <div class="calc-tile-price">500 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Декольте" data-price="900">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Декольте</div>
+                    <div class="calc-tile-price">900 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Ареолы" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Ареолы</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Подмышечные впадины" data-price="800">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Подмышки</div>
+                    <div class="calc-tile-price">800 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Белая линия живота" data-price="350">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Белая линия</div>
+                    <div class="calc-tile-price">350 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Живот полностью" data-price="1000">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Живот</div>
+                    <div class="calc-tile-price">1 000 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Поясница" data-price="900">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Поясница</div>
+                    <div class="calc-tile-price">900 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
+                <label class="calc-tile">
+                  <input type="checkbox" data-zone="Спина полностью" data-price="1700">
+                  <div class="calc-tile-card">
+                    <div class="calc-tile-name">Спина</div>
+                    <div class="calc-tile-price">1 700 ₽</div>
+                    <span class="calc-tile-check"></span>
+                  </div>
+                </label>
               </div>
             </div>
           </div>
 
-          <!-- ===== МУЖСКАЯ ===== -->
+          <!-- ============================ -->
+          <!-- МУЖСКАЯ                       -->
+          <!-- ============================ -->
           <div data-gender-block="men" style="display:none">
 
             <div class="calc-group">
-              <h3 class="calc-group-title">Зона лица</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Лоб" data-price="400"><span class="calc-option-label"><span class="calc-option-text">Лоб</span><span class="calc-option-price">400 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Бакенбарды" data-price="400"><span class="calc-option-label"><span class="calc-option-text">Бакенбарды</span><span class="calc-option-price">400 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Щёки" data-price="450"><span class="calc-option-label"><span class="calc-option-text">Щёки</span><span class="calc-option-price">450 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Подбородок" data-price="450"><span class="calc-option-label"><span class="calc-option-text">Подбородок</span><span class="calc-option-price">450 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Верхняя губа" data-price="350"><span class="calc-option-label"><span class="calc-option-text">Верхняя губа</span><span class="calc-option-price">350 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Лицо полностью" data-price="1800"><span class="calc-option-label"><span class="calc-option-text">Лицо полностью</span><span class="calc-option-price">1800 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                </div>
+                <h3 class="calc-group-title">Лицо</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile"><input type="checkbox" data-zone="Лоб" data-price="400">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Лоб</div><div class="calc-tile-price">400 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Бакенбарды" data-price="400">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Бакенбарды</div><div class="calc-tile-price">400 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Щёки" data-price="450">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Щёки</div><div class="calc-tile-price">450 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Подбородок" data-price="450">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Подбородок</div><div class="calc-tile-price">450 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Верхняя губа" data-price="350">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Верхняя губа</div><div class="calc-tile-price">350 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Лицо полностью" data-price="1800">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Лицо полностью</div><div class="calc-tile-price">1 800 ₽</div><span class="calc-tile-check"></span></div></label>
               </div>
             </div>
 
             <div class="calc-group">
-              <h3 class="calc-group-title">Зона тела</h3>
-              <div class="calc-options">
-                <label class="calc-option"><input type="checkbox" data-zone="Шея" data-price="650"><span class="calc-option-label"><span class="calc-option-text">Шея</span><span class="calc-option-price">650 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Плечи" data-price="600"><span class="calc-option-label"><span class="calc-option-text">Плечи</span><span class="calc-option-price">600 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Поясница" data-price="1000"><span class="calc-option-label"><span class="calc-option-text">Поясница</span><span class="calc-option-price">1000 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Спина полностью" data-price="1700"><span class="calc-option-label"><span class="calc-option-text">Спина</span><span class="calc-option-price">1700 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Грудь" data-price="800"><span class="calc-option-label"><span class="calc-option-text">Грудь</span><span class="calc-option-price">800 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Белая линия живота" data-price="500"><span class="calc-option-label"><span class="calc-option-text">Белая линия</span><span class="calc-option-price">500 ₽</span></span></label>
-                <label class="calc-option"><input type="checkbox" data-zone="Живот полностью" data-price="1100"><span class="calc-option-label"><span class="calc-option-text">Живот</span><span class="calc-option-price">1100 ₽</span></span></label>
+              <div class="calc-group-header">
+                <div class="calc-group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6 22V12c0-1 1-2 2-2h8c1 0 2 1 2 2v10"/></svg>
+                </div>
+                <h3 class="calc-group-title">Тело</h3>
+              </div>
+              <div class="calc-tiles">
+                <label class="calc-tile"><input type="checkbox" data-zone="Шея" data-price="650">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Шея</div><div class="calc-tile-price">650 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Плечи" data-price="600">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Плечи</div><div class="calc-tile-price">600 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Грудь" data-price="800">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Грудь</div><div class="calc-tile-price">800 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Белая линия живота" data-price="500">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Белая линия</div><div class="calc-tile-price">500 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Живот полностью" data-price="1100">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Живот</div><div class="calc-tile-price">1 100 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Поясница" data-price="1000">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Поясница</div><div class="calc-tile-price">1 000 ₽</div><span class="calc-tile-check"></span></div></label>
+                <label class="calc-tile"><input type="checkbox" data-zone="Спина полностью" data-price="1700">
+                  <div class="calc-tile-card"><div class="calc-tile-name">Спина</div><div class="calc-tile-price">1 700 ₽</div><span class="calc-tile-check"></span></div></label>
               </div>
             </div>
 
           </div>
+
         </div>
 
-        <!-- ===== Справа: сводка ===== -->
+        <!-- ===== ПРАВО: сводка ===== -->
         <aside class="calc-summary">
           <div class="calc-summary-title">Твой расчёт</div>
 
-          <!-- Тариф -->
-          <div class="calc-gender" data-summary="plan" style="margin-bottom: 20px; width:100%; display:flex">
-            <button class="active" data-discount="30" data-label="первое посещение −30%" style="flex:1">Первый раз −30%</button>
-            <button data-discount="15" data-label="абонемент на 5 процедур −15%" style="flex:1">Абонемент −15%</button>
-            <button data-discount="0" data-label="обычная цена" style="flex:1">Обычная</button>
+          <div class="calc-plan" data-role="plan">
+            <button class="active" data-discount="30" data-label="первое посещение −30%">
+              <strong>−30%</strong>
+              первый раз
+            </button>
+            <button data-discount="15" data-label="абонемент −15%">
+              <strong>−15%</strong>
+              абонемент
+            </button>
+            <button data-discount="0" data-label="обычная цена">
+              <strong>0%</strong>
+              обычная
+            </button>
           </div>
 
-          <div class="calc-selected-list">
-            <div class="calc-empty">Выберите зоны слева, чтобы увидеть итог</div>
+          <div class="calc-selected-list" id="calcSelectedList">
+            <div class="calc-empty">Выбери зоны слева</div>
           </div>
 
           <div class="calc-totals">
             <div class="calc-total-row">
-              <span class="calc-total-label">Сумма без скидки</span>
-              <span class="calc-total-value" data-summary="subtotal">0 ₽</span>
+              <span>Без скидки</span>
+              <span data-summary="subtotal">0 ₽</span>
             </div>
             <div class="calc-total-row discount" data-summary="discount-row" style="display:none">
               <span class="calc-total-label">Скидка</span>
               <span class="calc-total-value" data-summary="discount">0 ₽</span>
             </div>
             <div class="calc-total-row final">
-              <span class="calc-total-label">К оплате</span>
+              <span>Итого</span>
               <span class="calc-total-value" data-summary="final">0 ₽</span>
             </div>
           </div>
 
           <button class="calc-cta" disabled>
-            <span>Записаться по этому расчёту</span>
+            <span>Записаться</span>
             <span>→</span>
           </button>
-          <p class="calc-hint">Расчёт уйдёт в WhatsApp вместе с заявкой</p>
+          <p class="calc-cta-hint">Уйдёт в WhatsApp с подробным расчётом</p>
         </aside>
 
       </div>
     </div>
   </section>
+
   <section id="promo" class="reveal" style="padding-left: 0; padding-right: 0;">
     <div class="promo-section">
       <div class="section-label">🎉 акции и скидки</div>

@@ -531,8 +531,10 @@ section {
   .stats-grid    { grid-template-columns: 1fr; gap: 16px; }
   .stat-card     { padding: 32px 24px; }
   .contact-map   { height: 280px; }
-  .calculator    { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
-  .calc-summary  { position: static; padding: 28px; }
+  .calc-shell    { grid-template-columns: 1fr; gap: 20px; }
+  .calc-summary  { position: static; padding: 24px 20px; }
+  .calc-main     { padding: 24px 20px; }
+  .calc-tiles    { grid-template-columns: repeat(2, 1fr); }
   .review-card   { flex-basis: calc(100% - 0px); }
   section        { padding: 70px 24px; }
   .promo-section { padding: 60px 28px; margin: 0 16px; }
