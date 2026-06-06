@@ -9,5 +9,5 @@ Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
 User-agent: Googlebot
 Allow: /
 
-Sitemap: https://laserlive.ru/sitemap.xml
-Host: https://laserlive.ru
+Sitemap: https://laser-live.ru/sitemap.xml
+Host: https://laser-live.ru

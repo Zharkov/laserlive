@@ -24,23 +24,39 @@
 
 .nav-logo {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  line-height: 0.9;
+  align-items: flex-start;
+  line-height: 1;
+  text-decoration: none;
 }
-.nav-logo span:first-child { color: var(--ink-900); }
-.nav-logo span:last-child {
+.nav-logo-row {
+  display: flex;
+  align-items: baseline;
+}
+.nav-logo-row.top {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+.nav-logo-row.bottom {
   font-size: 11px;
-  letter-spacing: 8px;
+  font-weight: 500;
   background: linear-gradient(90deg, var(--pink-500), var(--violet-500));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-weight: 500;
+  margin-top: 4px;
 }
+/* Каждая буква в боксе фиксированной ширины. Буквы прижаты к левому краю
+   бокса — поэтому штрих L в обеих строках стартует с одной x-координаты. */
+.nav-logo-letter {
+  display: inline-block;
+  text-align: left;
+  font-variant: normal;
+}
+.nav-logo-row.top .nav-logo-letter    { width: 22px; }
+.nav-logo-row.bottom .nav-logo-letter { width: 22px; }
 
 .nav-links {
   display: flex;
@@ -162,9 +178,13 @@
   pointer-events: none;
   z-index: 1;
   font-weight: 700;
+  overflow: hidden;
 }
 .hero-decor.left  { top: 15%; left: -3%;   transform: rotate(-15deg); }
 .hero-decor.right { bottom: 8%; right: -3%; transform: rotate(10deg); }
+@media (max-width: 768px) {
+  .hero-decor { display: none; }
+}
 
 /* ===== СЕКЦИИ ===== */
 section {
@@ -219,12 +239,19 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 32px;
-  color: var(--pink-600);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   animation: float-icon 4s ease-in-out infinite;
+}
+.about-visual-mono {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 2px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
 }
 .about-content h2 {
   font-family: var(--font-display);
@@ -432,9 +459,14 @@ section {
   margin-bottom: 24px;
   font-size: 16px;
 }
+.contact-list li > div:not(.contact-icon) {
+  min-width: 0;
+  word-break: break-word;
+}
 .contact-list a {
   color: var(--white);
   transition: color 0.3s;
+  word-break: break-word;
 }
 .contact-list a:hover { color: var(--pink-300); }
 .contact-icon {
@@ -462,6 +494,9 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
   padding: 50px 40px;
+}
+@media (max-width: 560px) {
+  .contact-card { padding: 32px 22px; }
 }
 .contact-card h3 {
   font-family: var(--font-display);
@@ -536,10 +571,12 @@ section {
   .calc-main     { padding: 24px 20px; }
   .calc-tiles    { grid-template-columns: repeat(2, 1fr); }
   .review-card   { flex-basis: calc(100% - 0px); }
-  section        { padding: 70px 24px; }
-  .promo-section { padding: 60px 28px; margin: 0 16px; }
-  .nav           { padding: 14px 20px; }
-  .hero          { padding: 100px 20px 60px; }
+  section        { padding: 70px 20px; }
+  .promo-section { padding: 60px 24px; margin: 0 16px; }
+  .nav           { padding: 14px 16px; }
+  .hero          { padding: 100px 16px 60px; }
+  .hero h1       { word-break: keep-all; hyphens: none; }
+  .price-group-title { font-size: 26px; }
 }
 
 @media (max-width: 1100px) and (min-width: 969px) {
@@ -550,4 +587,15 @@ section {
   .benefits-grid,
   .complex-grid  { grid-template-columns: 1fr; }
   .marquee-item  { font-size: 20px; }
+  .calc-tiles    { grid-template-columns: 1fr; }
+  .calc-tile-card { flex-direction: row; justify-content: space-between; min-height: auto; padding: 14px 16px; text-align: left; }
+  .calc-tile-name { flex: 1; }
+  .calc-tile-price { font-size: 18px; }
+  .calc-tile-check { position: static; align-self: center; }
+  .promo-section { padding: 50px 20px; margin: 0 12px; border-radius: 24px; }
+  .promo-discount { font-size: 44px; }
+  .container { padding: 0 4px; }
+  .footer { padding: 40px 20px 24px; }
+  .footer-logo { font-size: 26px; letter-spacing: 3px; }
+  section { padding: 56px 16px; }
 }

@@ -1,11 +1,9 @@
 /**
  * CALCULATOR — плитки-карточки с иконками.
- * Клиент кликает по плиткам → видит итог справа → отправляет в WhatsApp.
+ * Клиент кликает по плиткам → видит итог справа → отправляется в MAX.
  */
 (function () {
   'use strict';
-
-  const WHATSAPP_PHONE = '79206609470';
 
   const root = document.getElementById('calculator');
   if (!root) return;
@@ -35,9 +33,13 @@
   });
 
   // ===== Тариф =====
+  const planDescEl = document.getElementById('calcPlanDesc');
   planButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       planButtons.forEach((b) => b.classList.toggle('active', b === btn));
+      if (planDescEl && btn.dataset.desc) {
+        planDescEl.textContent = btn.dataset.desc;
+      }
       update();
     });
   });
@@ -96,7 +98,9 @@
     ctaBtn.disabled = checked.length === 0;
   }
 
-  // ===== Отправка в WhatsApp =====
+  // ===== Отправка заявки с расчётом =====
+  const FORMSPREE_URL = 'https://formspree.io/f/mredyepk';
+
   ctaBtn.addEventListener('click', () => {
     const checked = Array.from(
       root.querySelectorAll('input[type="checkbox"][data-zone]:checked')
@@ -115,32 +119,130 @@
     const final = subtotal - discountAmount;
     const genderLabel = currentGender === 'women' ? 'Женская' : 'Мужская';
 
-    let text = 'Здравствуйте! Хочу записаться на лазерную эпиляцию.\n\n';
-    text += '*' + genderLabel + ' эпиляция*\n';
-    text += 'Выбранные зоны:\n';
+    // Формируем человекочитаемый текст для письма
+    let body = genderLabel + ' эпиляция.\n\n';
+    body += 'Выбранные зоны:\n';
     checked.forEach((cb) => {
-      text += '• ' + cb.dataset.zone + ' — ' + cb.dataset.price + ' ₽\n';
+      body += '• ' + cb.dataset.zone + ' — ' + cb.dataset.price + ' ₽\n';
     });
-    text += '\nТариф: ' + planLabel + '\n';
-    text += 'Сумма: ' + subtotal + ' ₽\n';
+    body += '\nТариф: ' + planLabel + '\n';
+    body += 'Сумма без скидки: ' + subtotal + ' ₽\n';
     if (discountAmount > 0) {
-      text += 'Скидка ' + discountPercent + '%: −' + discountAmount + ' ₽\n';
+      body += 'Скидка ' + discountPercent + '%: −' + discountAmount + ' ₽\n';
     }
-    text += '*Итого: ' + final + ' ₽*\n\nКогда можно записаться?';
+    body += 'ИТОГО: ' + final + ' ₽';
 
-    if (window.LaserConfetti) {
-      const rect = ctaBtn.getBoundingClientRect();
-      window.LaserConfetti.fire(rect.left + rect.width / 2, rect.top + rect.height / 2, 80);
-    }
-
-    setTimeout(() => {
-      window.open(
-        'https://wa.me/' + WHATSAPP_PHONE + '?text=' + encodeURIComponent(text),
-        '_blank',
-        'noopener'
-      );
-    }, 500);
+    openCalcModal({
+      summary: body,
+      finalPrice: final,
+      gender: genderLabel,
+      zones: checked.map((cb) => cb.dataset.zone),
+      plan: planLabel,
+    });
   });
+
+  // ===== Модалка с формой контактов =====
+  function openCalcModal(data) {
+    const modal = document.createElement('div');
+    modal.className = 'calc-modal';
+    modal.innerHTML =
+      '<div class="calc-modal-backdrop"></div>' +
+      '<div class="calc-modal-card">' +
+        '<button class="calc-modal-close" aria-label="Закрыть">×</button>' +
+        '<div class="calc-modal-header">' +
+          '<div class="calc-modal-label">записаться по расчёту</div>' +
+          '<h3 class="calc-modal-title">Итого: <em>' + data.finalPrice.toLocaleString('ru-RU') + ' ₽</em></h3>' +
+          '<p class="calc-modal-sub">Оставь имя и телефон — перезвоним за 15 минут и согласуем удобное время</p>' +
+        '</div>' +
+        '<form class="calc-modal-form" novalidate>' +
+          '<input type="text" name="name" placeholder="Как тебя зовут?" required>' +
+          '<input type="tel" name="phone" placeholder="Телефон для связи" required>' +
+          '<button type="submit">Отправить заявку</button>' +
+          '<p class="calc-modal-hint">Перезвоним в течение 15 минут</p>' +
+        '</form>' +
+      '</div>';
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => modal.classList.add('visible'));
+
+    const closeModal = () => {
+      modal.classList.remove('visible');
+      document.body.style.overflow = '';
+      setTimeout(() => modal.remove(), 300);
+    };
+
+    modal.querySelector('.calc-modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.calc-modal-backdrop').addEventListener('click', closeModal);
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+        document.removeEventListener('keydown', esc);
+      }
+    });
+
+    const form = modal.querySelector('.calc-modal-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      if (!name || !phone) {
+        alert('Укажи имя и телефон');
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправляем…';
+
+      try {
+        const response = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            calculation: data.summary,
+            final_price: data.finalPrice + ' ₽',
+            _subject: 'Заявка с калькулятора — ' + name + ' (' + data.finalPrice + ' ₽)',
+            source: 'Калькулятор стоимости',
+          }),
+        });
+        if (!response.ok) throw new Error('Server error');
+
+        // Успех — заменяем содержимое модалки
+        modal.querySelector('.calc-modal-card').innerHTML =
+          '<button class="calc-modal-close" aria-label="Закрыть">×</button>' +
+          '<div class="form-success">' +
+            '<div class="form-success-icon">' +
+              '<svg viewBox="0 0 60 60" width="60" height="60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
+                '<circle cx="30" cy="30" r="26"/>' +
+                '<path d="M18 30 L26 38 L42 22"/>' +
+              '</svg>' +
+            '</div>' +
+            '<h3 class="form-success-title">Спасибо, ' + escapeHtml(name) + '!</h3>' +
+            '<p class="form-success-text">Заявка с расчётом отправлена. Перезвоним в течение 15 минут.</p>' +
+            '<p class="form-success-hint">Если срочно — звони: <a href="tel:+79966292410">+7 (996) 629-24-10</a></p>' +
+          '</div>';
+
+        modal.querySelector('.calc-modal-close').addEventListener('click', closeModal);
+
+        if (window.LaserConfetti) {
+          const rect = modal.querySelector('.calc-modal-card').getBoundingClientRect();
+          window.LaserConfetti.fire(rect.left + rect.width / 2, rect.top + rect.height / 3, 120);
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+        alert('Ошибка отправки. Позвони нам: +7 (996) 629-24-10');
+      }
+    });
+  }
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
 
   update();
 })();

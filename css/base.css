@@ -35,6 +35,12 @@ body {
 .bg-blob.b { width: 600px; height: 600px; top: 30%;   right: -15%;  background: var(--violet-400); animation-delay: -7s; }
 .bg-blob.c { width: 450px; height: 450px; bottom: -10%; left: 20%;  background: var(--peach-300); animation-delay: -14s; }
 
+@media (max-width: 768px) {
+  .bg-blob.a { width: 280px; height: 280px; }
+  .bg-blob.b { width: 320px; height: 320px; }
+  .bg-blob.c { width: 240px; height: 240px; }
+}
+
 /* Общий контейнер */
 .container {
   max-width: 1200px;

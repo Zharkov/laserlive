@@ -51,10 +51,10 @@
   to   { transform: rotate(360deg); }
 }
 
-/* Пульс кнопки WhatsApp */
+/* Пульс кнопки MAX */
 @keyframes fab-pulse {
-  0%, 100% { box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4); }
-  50%      { box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4), 0 0 0 20px rgba(37, 211, 102, 0); }
+  0%, 100% { box-shadow: 0 12px 32px rgba(107, 91, 217, 0.45); }
+  50%      { box-shadow: 0 12px 32px rgba(107, 91, 217, 0.45), 0 0 0 20px rgba(107, 91, 217, 0); }
 }
 
 /* Появление при скролле — управляется JS */

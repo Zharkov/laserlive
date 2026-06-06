@@ -1,18 +1,20 @@
 /**
  * FORM — обработка формы заявки.
- * При успешной отправке: запускает конфетти и открывает WhatsApp
- * с готовым сообщением.
+ * Отправляет данные в Formspree → приходит на почту студии.
+ * При успехе показывает экран благодарности с конфетти.
  */
 (function () {
   'use strict';
 
-  // Номер для связи — меняй здесь
-  const WHATSAPP_PHONE = '79206609470';
+  // Endpoint Formspree — менять здесь
+  const FORMSPREE_URL = 'https://formspree.io/f/mredyepk';
 
   const form = document.getElementById('contactForm');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  const card = form.closest('.contact-card');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = form.name.value.trim();
@@ -24,25 +26,78 @@
       return;
     }
 
-    // Конфетти из координат кнопки отправки
-    if (window.LaserConfetti) {
-      const button = form.querySelector('button[type="submit"]');
-      const rect = button.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      window.LaserConfetti.fire(x, y, 100);
+    // Блокируем кнопку, показываем индикатор отправки
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Отправляем…';
+
+    try {
+      const response = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          message: message || '(не указано)',
+          _subject: 'Новая заявка с сайта LaserLive — ' + name,
+          source: 'Форма «Записаться онлайн»',
+        }),
+      });
+
+      if (!response.ok) throw new Error('Server error: ' + response.status);
+
+      // Успех — показываем благодарственный экран
+      showSuccess(card, name);
+
+      // Конфетти из центра карточки
+      if (window.LaserConfetti && card) {
+        const rect = card.getBoundingClientRect();
+        window.LaserConfetti.fire(
+          rect.left + rect.width / 2,
+          rect.top + rect.height / 3,
+          120
+        );
+      }
+    } catch (err) {
+      // Ошибка отправки — показываем сообщение и кнопку «попробовать снова»
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      if (window.LaserToast) {
+        window.LaserToast.show(
+          'Ой, не получилось отправить',
+          'Проверь интернет или просто позвони нам — +7 (996) 629-24-10',
+          7000
+        );
+      } else {
+        alert('Ошибка отправки. Позвоните нам: +7 (996) 629-24-10');
+      }
     }
-
-    const text =
-      `Здравствуйте! Меня зовут ${name}, телефон ${phone}.` +
-      (message ? ` ${message}` : '') +
-      ' Хочу записаться на процедуру.';
-
-    const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
-
-    // Небольшая задержка чтобы пользователь увидел конфетти
-    setTimeout(() => {
-      window.open(url, '_blank', 'noopener');
-    }, 600);
   });
+
+  function showSuccess(container, name) {
+    if (!container) return;
+
+    container.innerHTML =
+      '<div class="form-success">' +
+        '<div class="form-success-icon">' +
+          '<svg viewBox="0 0 60 60" width="60" height="60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
+            '<circle cx="30" cy="30" r="26"/>' +
+            '<path d="M18 30 L26 38 L42 22"/>' +
+          '</svg>' +
+        '</div>' +
+        '<h3 class="form-success-title">Спасибо, ' + escapeHtml(name) + '!</h3>' +
+        '<p class="form-success-text">Заявка принята. Перезвоним в течение 15 минут на указанный номер.</p>' +
+        '<p class="form-success-hint">А если торопишься — позвони сама: <a href="tel:+79966292410">+7 (996) 629-24-10</a></p>' +
+      '</div>';
+  }
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
 })();
