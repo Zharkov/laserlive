@@ -121,6 +121,25 @@
   position: relative;
   padding: 120px 32px 80px;
   text-align: center;
+  overflow: hidden;
+}
+/* Фоновое фото */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/photos/hero-bg.jpg') center 35% / cover no-repeat;
+  z-index: 0;
+}
+/* Фирменный градиентный оверлей поверх фото */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 61, 143, 0.55) 0%, rgba(168, 85, 247, 0.52) 55%, rgba(255, 138, 101, 0.50) 100%),
+    linear-gradient(180deg, rgba(26, 11, 20, 0.20) 0%, rgba(26, 11, 20, 0.42) 100%);
+  z-index: 1;
 }
 .hero-content {
   max-width: 900px;
@@ -134,11 +153,12 @@
   line-height: 0.95;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
-  color: var(--ink-900);
+  color: #fff;
+  text-shadow: 0 4px 30px rgba(26, 11, 20, 0.3);
   animation: fadeUp 0.8s ease 0.2s both;
 }
 .hero h1 .gradient {
-  background: var(--gradient-vibrant);
+  background: linear-gradient(135deg, #fff 0%, #ffe4f1 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -149,17 +169,19 @@
 .hero-script {
   font-family: var(--font-script);
   font-size: clamp(24px, 4vw, 36px);
-  color: var(--pink-600);
+  color: #fff;
   margin-bottom: 20px;
   transform: rotate(-2deg);
   display: inline-block;
+  text-shadow: 0 2px 16px rgba(26, 11, 20, 0.3);
   animation: fadeUp 0.8s ease 0.3s both;
 }
 .hero-sub {
   font-size: clamp(16px, 2vw, 19px);
-  color: var(--ink-500);
+  color: rgba(255, 255, 255, 0.92);
   max-width: 580px;
   margin: 0 auto 40px;
+  text-shadow: 0 2px 16px rgba(26, 11, 20, 0.35);
   animation: fadeUp 0.8s ease 0.4s both;
 }
 .hero-cta-group {
@@ -180,11 +202,7 @@
   font-weight: 700;
   overflow: hidden;
 }
-.hero-decor.left  { top: 15%; left: -3%;   transform: rotate(-15deg); }
-.hero-decor.right { bottom: 8%; right: -3%; transform: rotate(10deg); }
-@media (max-width: 768px) {
-  .hero-decor { display: none; }
-}
+.hero-decor { display: none; }
 
 /* ===== СЕКЦИИ ===== */
 section {

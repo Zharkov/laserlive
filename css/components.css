@@ -85,6 +85,27 @@
   animation: pulse 2s infinite;
 }
 
+/* Hero на фото-фоне — светлые версии элементов */
+.hero .hero-eyebrow {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+.hero .hero-eyebrow::before {
+  background: #fff;
+  box-shadow: 0 0 12px #fff;
+}
+.hero .btn-secondary {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.hero .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--ink-900);
+  border-color: #fff;
+}
+
 /* ===== БЛЁСТКИ ===== */
 .sparkle {
   position: absolute;
