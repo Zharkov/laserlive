@@ -181,11 +181,36 @@
     });
 
     const form = modal.querySelector('.calc-modal-form');
+
+    // Маска телефона в модалке
+    const phoneInput = form.querySelector('input[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        let digits = e.target.value.replace(/\D/g, '');
+        if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+        if (digits.startsWith('7')) digits = digits.slice(0, 11);
+        else digits = digits.slice(0, 10);
+        let masked = '';
+        if (digits.startsWith('7')) {
+          const d = digits.slice(1);
+          masked = '+7';
+          if (d.length > 0) masked += ' (' + d.slice(0, 3);
+          if (d.length >= 3) masked += ') ' + d.slice(3, 6);
+          if (d.length >= 6) masked += '-' + d.slice(6, 8);
+          if (d.length >= 8) masked += '-' + d.slice(8, 10);
+        } else {
+          masked = digits;
+        }
+        e.target.value = masked;
+      });
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = form.name.value.trim();
       const phone = form.phone.value.trim();
-      if (!name || !phone) {
+      const digits = phone.replace(/\D/g, '');
+      if (!name || digits.length < 10) {
         alert('Укажи имя и телефон');
         return;
       }

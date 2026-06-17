@@ -265,11 +265,16 @@ section {
   font-weight: 700;
   font-size: 30px;
   letter-spacing: 2px;
-  background: var(--gradient-primary);
+  line-height: 1;
+}
+.about-visual-mono .ll-top {
+  color: var(--ink-900);
+}
+.about-visual-mono .ll-bottom {
+  background: linear-gradient(90deg, var(--pink-500), var(--violet-500));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  line-height: 1;
 }
 .about-content h2 {
   font-family: var(--font-display);
