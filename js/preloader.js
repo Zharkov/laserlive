@@ -13,16 +13,18 @@
 
   const MIN_TIME = 800;
   const startTime = performance.now();
+  let called = false;
 
   const hide = () => {
+    if (called) return;
+    called = true;
+
     const elapsed = performance.now() - startTime;
     const wait = Math.max(0, MIN_TIME - elapsed);
 
     setTimeout(() => {
       preloader.classList.add('hidden');
       document.body.classList.remove('loading');
-
-      // Удаляем из DOM после анимации скрытия
       setTimeout(() => preloader.remove(), 800);
     }, wait);
   };
@@ -31,7 +33,6 @@
     hide();
   } else {
     window.addEventListener('load', hide);
-    // Защита от зависания — максимум 4 секунды
     setTimeout(hide, 4000);
   }
 })();

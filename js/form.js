@@ -6,39 +6,15 @@
 (function () {
   'use strict';
 
-  // Endpoint Formspree — менять здесь
-  const FORMSPREE_URL = 'https://formspree.io/f/mredyepk';
+  const { FORMSPREE_URL, escapeHtml, applyPhoneMask } = window.LaserUtils;
 
   const form = document.getElementById('contactForm');
   if (!form) return;
 
   const card = form.closest('.contact-card');
 
-  // ===== Маска телефона =====
   const phoneInput = form.querySelector('input[name="phone"]');
-  if (phoneInput) {
-    phoneInput.addEventListener('input', (e) => {
-      let digits = e.target.value.replace(/\D/g, '');
-      if (digits.startsWith('8')) digits = '7' + digits.slice(1);
-      if (digits.startsWith('7')) digits = digits.slice(0, 11);
-      else digits = digits.slice(0, 10);
-
-      let masked = '';
-      if (digits.length === 0) {
-        masked = '';
-      } else if (digits.startsWith('7')) {
-        const d = digits.slice(1);
-        masked = '+7';
-        if (d.length > 0) masked += ' (' + d.slice(0, 3);
-        if (d.length >= 3) masked += ') ' + d.slice(3, 6);
-        if (d.length >= 6) masked += '-' + d.slice(6, 8);
-        if (d.length >= 8) masked += '-' + d.slice(8, 10);
-      } else {
-        masked = digits;
-      }
-      e.target.value = masked;
-    });
-  }
+  if (phoneInput) applyPhoneMask(phoneInput);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -53,8 +29,8 @@
       return;
     }
 
-    // Блокируем кнопку, показываем индикатор отправки
     const submitBtn = form.querySelector('button[type="submit"]');
+    if (!submitBtn) return;
     const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Отправляем…';
@@ -77,10 +53,8 @@
 
       if (!response.ok) throw new Error('Server error: ' + response.status);
 
-      // Успех — показываем благодарственный экран
       showSuccess(card, name);
 
-      // Конфетти из центра карточки
       if (window.LaserConfetti && card) {
         const rect = card.getBoundingClientRect();
         window.LaserConfetti.fire(
@@ -90,7 +64,6 @@
         );
       }
     } catch (err) {
-      // Ошибка отправки — показываем сообщение и кнопку «попробовать снова»
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
       if (window.LaserToast) {
@@ -107,7 +80,6 @@
 
   function showSuccess(container, name) {
     if (!container) return;
-
     container.innerHTML =
       '<div class="form-success">' +
         '<div class="form-success-icon">' +
@@ -120,11 +92,5 @@
         '<p class="form-success-text">Заявка принята. Перезвоним в течение 15 минут на указанный номер.</p>' +
         '<p class="form-success-hint">А если торопишься — позвони сама: <a href="tel:+79966292410">+7 (996) 629-24-10</a></p>' +
       '</div>';
-  }
-
-  function escapeHtml(s) {
-    const div = document.createElement('div');
-    div.textContent = s;
-    return div.innerHTML;
   }
 })();

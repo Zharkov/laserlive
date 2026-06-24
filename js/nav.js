@@ -8,15 +8,35 @@
   const toggle = document.getElementById('mobileToggle');
   const links = document.getElementById('navLinks');
 
-  // Переключение мобильного меню
+  const closeMenu = () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
   if (toggle && links) {
     toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
+      const isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
     // Закрываем меню при клике по ссылке
     links.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => links.classList.remove('open'));
+      a.addEventListener('click', closeMenu);
+    });
+
+    // Закрываем при клике вне меню
+    document.addEventListener('click', (e) => {
+      if (links.classList.contains('open') && !nav.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Закрываем по Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && links.classList.contains('open')) {
+        closeMenu();
+        toggle.focus();
+      }
     });
   }
 

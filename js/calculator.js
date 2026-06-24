@@ -5,6 +5,8 @@
 (function () {
   'use strict';
 
+  const { FORMSPREE_URL, escapeHtml, applyPhoneMask } = window.LaserUtils;
+
   const root = document.getElementById('calculator');
   if (!root) return;
 
@@ -19,6 +21,9 @@
   const ctaBtn = root.querySelector('.calc-cta');
 
   let currentGender = 'women';
+
+  // Последний результат update() — используется в ctaBtn без пересчёта
+  let lastState = { checked: [], subtotal: 0, discountPercent: 0, discountAmount: 0, final: 0, planLabel: '' };
 
   // ===== Переключатель пола =====
   genderButtons.forEach((btn) => {
@@ -81,6 +86,7 @@
     const subtotal = checked.reduce((s, cb) => s + parseInt(cb.dataset.price, 10), 0);
     const activePlan = root.querySelector('[data-role="plan"] button.active');
     const discountPercent = activePlan ? parseInt(activePlan.dataset.discount, 10) : 0;
+    const planLabel = (activePlan && activePlan.dataset.label) || 'обычная цена';
     const discountAmount = Math.round((subtotal * discountPercent) / 100);
     const final = subtotal - discountAmount;
 
@@ -96,30 +102,17 @@
 
     finalEl.textContent = final.toLocaleString('ru-RU') + ' ₽';
     ctaBtn.disabled = checked.length === 0;
+
+    lastState = { checked, subtotal, discountPercent, discountAmount, final, planLabel };
   }
 
   // ===== Отправка заявки с расчётом =====
-  const FORMSPREE_URL = 'https://formspree.io/f/mredyepk';
-
   ctaBtn.addEventListener('click', () => {
-    const checked = Array.from(
-      root.querySelectorAll('input[type="checkbox"][data-zone]:checked')
-    ).filter((cb) => {
-      const block = cb.closest('[data-gender-block]');
-      return !block || block.style.display !== 'none';
-    });
-
+    const { checked, subtotal, discountPercent, discountAmount, final, planLabel } = lastState;
     if (checked.length === 0) return;
 
-    const subtotal = checked.reduce((s, cb) => s + parseInt(cb.dataset.price, 10), 0);
-    const activePlan = root.querySelector('[data-role="plan"] button.active');
-    const discountPercent = activePlan ? parseInt(activePlan.dataset.discount, 10) : 0;
-    const planLabel = (activePlan && activePlan.dataset.label) || 'обычная цена';
-    const discountAmount = Math.round((subtotal * discountPercent) / 100);
-    const final = subtotal - discountAmount;
     const genderLabel = currentGender === 'women' ? 'Женская' : 'Мужская';
 
-    // Формируем человекочитаемый текст для письма
     let body = genderLabel + ' эпиляция.\n\n';
     body += 'Выбранные зоны:\n';
     checked.forEach((cb) => {
@@ -145,6 +138,9 @@
   function openCalcModal(data) {
     const modal = document.createElement('div');
     modal.className = 'calc-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Оформление заявки');
     modal.innerHTML =
       '<div class="calc-modal-backdrop"></div>' +
       '<div class="calc-modal-card">' +
@@ -163,47 +159,34 @@
       '</div>';
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => modal.classList.add('visible'));
 
+    // Закрытие — единая функция, снимает Escape-слушатель со всех путей
+    let escHandler;
     const closeModal = () => {
       modal.classList.remove('visible');
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', escHandler);
       setTimeout(() => modal.remove(), 300);
     };
+    escHandler = (e) => {
+      if (e.key === 'Escape') closeModal();
+    };
+    document.addEventListener('keydown', escHandler);
 
     modal.querySelector('.calc-modal-close').addEventListener('click', closeModal);
     modal.querySelector('.calc-modal-backdrop').addEventListener('click', closeModal);
-    document.addEventListener('keydown', function esc(e) {
-      if (e.key === 'Escape') {
-        closeModal();
-        document.removeEventListener('keydown', esc);
-      }
+
+    // Анимация появления + фокус на первое поле
+    requestAnimationFrame(() => {
+      modal.classList.add('visible');
+      const firstInput = modal.querySelector('input[name="name"]');
+      if (firstInput) firstInput.focus();
     });
 
     const form = modal.querySelector('.calc-modal-form');
 
-    // Маска телефона в модалке
     const phoneInput = form.querySelector('input[name="phone"]');
-    if (phoneInput) {
-      phoneInput.addEventListener('input', (e) => {
-        let digits = e.target.value.replace(/\D/g, '');
-        if (digits.startsWith('8')) digits = '7' + digits.slice(1);
-        if (digits.startsWith('7')) digits = digits.slice(0, 11);
-        else digits = digits.slice(0, 10);
-        let masked = '';
-        if (digits.startsWith('7')) {
-          const d = digits.slice(1);
-          masked = '+7';
-          if (d.length > 0) masked += ' (' + d.slice(0, 3);
-          if (d.length >= 3) masked += ') ' + d.slice(3, 6);
-          if (d.length >= 6) masked += '-' + d.slice(6, 8);
-          if (d.length >= 8) masked += '-' + d.slice(8, 10);
-        } else {
-          masked = digits;
-        }
-        e.target.value = masked;
-      });
-    }
+    if (phoneInput) applyPhoneMask(phoneInput);
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -216,6 +199,7 @@
       }
 
       const submitBtn = form.querySelector('button[type="submit"]');
+      if (!submitBtn) return;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправляем…';
 
@@ -234,8 +218,8 @@
         });
         if (!response.ok) throw new Error('Server error');
 
-        // Успех — заменяем содержимое модалки
-        modal.querySelector('.calc-modal-card').innerHTML =
+        const card = modal.querySelector('.calc-modal-card');
+        card.innerHTML =
           '<button class="calc-modal-close" aria-label="Закрыть">×</button>' +
           '<div class="form-success">' +
             '<div class="form-success-icon">' +
@@ -249,10 +233,10 @@
             '<p class="form-success-hint">Если срочно — звони: <a href="tel:+79966292410">+7 (996) 629-24-10</a></p>' +
           '</div>';
 
-        modal.querySelector('.calc-modal-close').addEventListener('click', closeModal);
+        card.querySelector('.calc-modal-close').addEventListener('click', closeModal);
 
         if (window.LaserConfetti) {
-          const rect = modal.querySelector('.calc-modal-card').getBoundingClientRect();
+          const rect = card.getBoundingClientRect();
           window.LaserConfetti.fire(rect.left + rect.width / 2, rect.top + rect.height / 3, 120);
         }
       } catch (err) {
@@ -261,12 +245,6 @@
         alert('Ошибка отправки. Позвони нам: +7 (996) 629-24-10');
       }
     });
-  }
-
-  function escapeHtml(s) {
-    const div = document.createElement('div');
-    div.textContent = s;
-    return div.innerHTML;
   }
 
   update();
