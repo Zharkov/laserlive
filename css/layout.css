@@ -257,20 +257,28 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 3px rgba(233, 30, 122, 0.18);
   animation: float-icon 4s ease-in-out infinite;
 }
-.about-visual-mono {
+.about-logo-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.about-logo-laser {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 30px;
+  font-size: 18px;
+  color: var(--ink-900);
   letter-spacing: 2px;
   line-height: 1;
 }
-.about-visual-mono .ll-top {
-  color: var(--ink-900);
-}
-.about-visual-mono .ll-bottom {
+.about-logo-live {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 9px;
+  letter-spacing: 4px;
   background: linear-gradient(90deg, var(--pink-500), var(--violet-500));
   -webkit-background-clip: text;
   background-clip: text;
