@@ -1199,6 +1199,10 @@ body.loading {
   font-size: 20px;
   flex-shrink: 0;
 }
+.review-avatar--emoji {
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 26px;
+}
 
 .review-meta-name {
   font-weight: 600;
@@ -1857,4 +1861,49 @@ img.lazy-img.loaded {
     right: 20px;
     font-size: 20px;
   }
+}
+
+/* ===== ПАСХАЛКА — котик ===== */
+.easter-cat {
+  position: fixed;
+  top: calc(50vh - 60px);
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: cat-run 7s linear forwards;
+}
+.easter-cat-bubble {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--pink-400), var(--violet-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  animation: cat-bubble 7s ease-in-out forwards;
+}
+.easter-cat-emoji {
+  font-size: 110px;
+  line-height: 1;
+  display: block;
+  animation: cat-hop 0.35s ease-in-out infinite alternate;
+}
+@keyframes cat-run {
+  0%   { transform: translateX(-120px); }
+  100% { transform: translateX(calc(100vw + 120px)); }
+}
+@keyframes cat-bubble {
+  0%, 10% { opacity: 0; }
+  20%, 80% { opacity: 1; }
+  100%     { opacity: 0; }
+}
+@keyframes cat-hop {
+  from { transform: translateY(0) rotate(-6deg); }
+  to   { transform: translateY(-14px) rotate(6deg); }
 }
