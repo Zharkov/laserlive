@@ -151,8 +151,8 @@
           '<p class="calc-modal-sub">Оставь имя и телефон — перезвоним за 15 минут и согласуем удобное время</p>' +
         '</div>' +
         '<form class="calc-modal-form" novalidate>' +
-          '<input type="text" name="name" placeholder="Как тебя зовут?" required>' +
-          '<input type="tel" name="phone" placeholder="Телефон для связи" required>' +
+          '<input type="text" name="name" placeholder="Как тебя зовут?" required class="ym-disable-keys">' +
+          '<input type="tel" name="phone" placeholder="Телефон для связи" required class="ym-disable-keys">' +
           '<button type="submit">Отправить заявку</button>' +
           '<p class="calc-modal-hint">Перезвоним в течение 15 минут</p>' +
         '</form>' +

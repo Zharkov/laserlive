@@ -32,11 +32,6 @@
   <meta name="twitter:title" content="LaserLive — Студия лазерной эпиляции в Вязьме">
   <meta name="twitter:description" content="Безболезненная лазерная эпиляция. Скидка 30% на первое посещение.">
 
-  <!-- Верификация для поисковиков (раскомментируй после регистрации) -->
-  <!-- <meta name="yandex-verification" content="ТВОЙ_КОД"> -->
-  <!-- <meta name="google-site-verification" content="ТВОЙ_КОД"> -->
-
-  <!-- Favicon (положи свой файл в assets/images/) -->
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
@@ -98,6 +93,9 @@
   }
   </script>
 
+  <!-- Dikidi — виджет онлайн-записи -->
+  <script type="text/javascript" src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1773811740"></script>
+
   <!-- ============ ЯНДЕКС.МЕТРИКА ============ -->
   <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -142,7 +140,7 @@
       <a href="#prices">Цены</a>
       <a href="#calc">Калькулятор</a>
       <a href="#reviews">Отзывы</a>
-      <a href="#contact" class="nav-cta">Записаться</a>
+      <a href="https://dikidi.net/#widget=212392" class="nav-cta">Записаться</a>
     </div>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Меню" aria-expanded="false">☰</button>
   </nav>
@@ -162,7 +160,7 @@
       <h1>Лазерная <span class="gradient">эпиляция</span><br>без боли и хлопот</h1>
       <p class="hero-sub">Лазерная эпиляция, после которой не нужно брать станок каждые три дня. Без раздражения, вросших волос и боли — только результат, который остаётся надолго.</p>
       <div class="hero-cta-group">
-        <a href="#contact" class="btn-primary">Записаться со скидкой 30% →</a>
+        <a href="https://dikidi.net/#widget=212392" class="btn-primary">Записаться со скидкой 30% →</a>
         <a href="#prices" class="btn-secondary">Прайс-лист</a>
       </div>
     </div>
@@ -1044,13 +1042,9 @@
 
         <div class="contact-card">
           <h3>Запишись <em>онлайн</em></h3>
-          <form class="contact-form" id="contactForm" novalidate>
-            <input type="text" name="name" placeholder="Как вас зовут?" required>
-            <input type="tel" name="phone" placeholder="Телефон для связи" required>
-            <textarea name="message" placeholder="Какая зона интересует? (необязательно)"></textarea>
-            <button type="submit">Записаться на процедуру</button>
-            <p class="contact-form-note">Перезвоним в течение 15 минут</p>
-          </form>
+          <p class="contact-card-sub">Выбери удобное время прямо сейчас — без звонков и ожидания</p>
+          <a href="https://dikidi.net/#widget=212392" class="btn-primary contact-dikidi-btn">Записаться онлайн →</a>
+          <p class="contact-form-note">Или позвони: <a href="tel:+79966292410">+7 (996) 629-24-10</a></p>
         </div>
       </div>
 
@@ -1095,7 +1089,6 @@
   <script src="js/reviews.js" defer></script>
   <script src="js/gallery.js" defer></script>
   <script src="js/ui-enhance.js" defer></script>
-  <script src="js/form.js" defer></script>
 
 </body>
 </html>
