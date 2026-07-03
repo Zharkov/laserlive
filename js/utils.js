@@ -1,5 +1,5 @@
 /**
- * UTILS — общие утилиты для form.js и calculator.js
+ * UTILS — общие утилиты для calculator.js
  * Загружается раньше остальных скриптов (порядок в index.html важен).
  */
 (function (w) {

@@ -31,6 +31,9 @@
   --cream: #fff9f3;
   --white: #ffffff;
 
+  /* Повторяющийся бордер «стеклянных» карточек (benefit, stat-card, faq-item, calc-main…) */
+  --border-glass: rgba(255, 158, 201, 0.3);
+
   /* Тени */
   --shadow-soft:   0 20px 60px -20px rgba(233, 30, 122, 0.25);
   --shadow-strong: 0 30px 80px -20px rgba(233, 30, 122, 0.4);

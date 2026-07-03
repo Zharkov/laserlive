@@ -6,7 +6,7 @@
 
   <!-- ============ SEO ============ -->
   <title>LaserLive — Студия лазерной эпиляции в Вязьме | Екатерина Ховалкина</title>
-  <meta name="description" content="Студия лазерной эпиляции LaserLive в Вязьме. Безболезненная и эффективная лазерная эпиляция для женщин и мужчин. Цены от 300 ₽. Запись по телефону +7 (996) 629-24-10. Адрес: ул. Ленина 14б.">
+  <meta name="description" content="Студия лазерной эпиляции LaserLive в Вязьме. Безболезненная эпиляция для женщин и мужчин, цены от 300 ₽. Запись: +7 (996) 629-24-10, ул. Ленина 14б.">
   <meta name="keywords" content="лазерная эпиляция Вязьма, эпиляция Вязьма, студия лазерной эпиляции, эпиляция бикини Вязьма, лазерная эпиляция цена, удаление волос лазером, LaserLive, Екатерина Ховалкина">
   <meta name="author" content="LaserLive — Екатерина Ховалкина">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -44,7 +44,9 @@
   <!-- Шрифты -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://dikidi.net">
+  <link rel="preconnect" href="https://mc.yandex.ru">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Стили (порядок важен) -->
   <link rel="stylesheet" href="css/reset.css">
@@ -94,7 +96,7 @@
   </script>
 
   <!-- Dikidi — виджет онлайн-записи -->
-  <script type="text/javascript" src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1773811740"></script>
+  <script type="text/javascript" defer src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1773811740"></script>
 
   <!-- ============ ЯНДЕКС.МЕТРИКА ============ -->
   <script type="text/javascript">
@@ -118,11 +120,13 @@
     <div class="preloader-bar"></div>
   </div>
 
-  <!-- Фон -->
+  <!-- Фон. Каждый блоб — обёртка (двигает JS-параллакс по scroll/mouse) +
+       внутренний слой (крутит CSS-анимацию float). Раздельные слои — чтобы
+       JS и CSS не перезаписывали transform друг друга. -->
   <div class="bg-canvas"></div>
-  <div class="bg-blob a"></div>
-  <div class="bg-blob b"></div>
-  <div class="bg-blob c"></div>
+  <div class="bg-blob-wrap a"><div class="bg-blob"></div></div>
+  <div class="bg-blob-wrap b"><div class="bg-blob"></div></div>
+  <div class="bg-blob-wrap c"><div class="bg-blob"></div></div>
 
   <!-- ============ НАВИГАЦИЯ ============ -->
   <nav class="nav" id="nav">
@@ -249,30 +253,48 @@
       <p class="section-sub">Уютный кабинет в центре Вязьмы, современное оборудование и стерильная чистота</p>
 
       <div class="gallery-grid">
-        <div class="gallery-item" data-src="assets/photos/building.jpg">
-          <img src="assets/photos/building.jpg" alt="Здание студии LaserLive, Вязьма, ул. Ленина 14б" loading="lazy">
+        <button type="button" class="gallery-item" data-src="assets/photos/building.jpg" aria-label="Открыть фото: Наше здание · Ленина 14б">
+          <picture>
+            <source srcset="assets/photos/building.webp" type="image/webp">
+            <img src="assets/photos/building.jpg" alt="Здание студии LaserLive, Вязьма, ул. Ленина 14б" loading="lazy" width="1200" height="900">
+          </picture>
           <span class="gallery-caption">Наше здание · Ленина 14б</span>
-        </div>
-        <div class="gallery-item" data-src="assets/photos/door.jpg">
-          <img src="assets/photos/door.jpg" alt="Кабинет №6 — студия LaserLive" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/photos/door.jpg" aria-label="Открыть фото: Кабинет №6">
+          <picture>
+            <source srcset="assets/photos/door.webp" type="image/webp">
+            <img src="assets/photos/door.jpg" alt="Кабинет №6 — студия LaserLive" loading="lazy" width="1200" height="1600">
+          </picture>
           <span class="gallery-caption">Кабинет №6</span>
-        </div>
-        <div class="gallery-item" data-src="assets/photos/certificates.jpg">
-          <img src="assets/photos/certificates.jpg" alt="Сертификаты и удостоверения мастера LaserLive" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/photos/certificates.jpg" aria-label="Открыть фото: Сертификаты и обучение">
+          <picture>
+            <source srcset="assets/photos/certificates.webp" type="image/webp">
+            <img src="assets/photos/certificates.jpg" alt="Сертификаты и удостоверения мастера LaserLive" loading="lazy" width="1200" height="900">
+          </picture>
           <span class="gallery-caption">Сертификаты и обучение</span>
-        </div>
-        <div class="gallery-item" data-src="assets/photos/lounge.jpg">
-          <img src="assets/photos/lounge.jpg" alt="Зона ожидания студии LaserLive" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/photos/lounge.jpg" aria-label="Открыть фото: Зона ожидания">
+          <picture>
+            <source srcset="assets/photos/lounge.webp" type="image/webp">
+            <img src="assets/photos/lounge.jpg" alt="Зона ожидания студии LaserLive" loading="lazy" width="1200" height="1600">
+          </picture>
           <span class="gallery-caption">Зона ожидания</span>
-        </div>
-        <div class="gallery-item" data-src="assets/photos/interior.jpg">
-          <img src="assets/photos/interior.jpg" alt="Интерьер студии LaserLive" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/photos/interior.jpg" aria-label="Открыть фото: Уголок для переодевания">
+          <picture>
+            <source srcset="assets/photos/interior.webp" type="image/webp">
+            <img src="assets/photos/interior.jpg" alt="Интерьер студии LaserLive" loading="lazy" width="1200" height="1600">
+          </picture>
           <span class="gallery-caption">Уголок для переодевания</span>
-        </div>
-        <div class="gallery-item" data-src="assets/photos/equipment.jpg">
-          <img src="assets/photos/equipment.jpg" alt="Кабинет лазерной эпиляции LaserLive — диодный лазер" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/photos/equipment.jpg" aria-label="Открыть фото: Кабинет с диодным лазером">
+          <picture>
+            <source srcset="assets/photos/equipment.webp" type="image/webp">
+            <img src="assets/photos/equipment.jpg" alt="Кабинет лазерной эпиляции LaserLive — диодный лазер" loading="lazy" width="1200" height="1600">
+          </picture>
           <span class="gallery-caption">Кабинет с диодным лазером</span>
-        </div>
+        </button>
       </div>
     </div>
   </section>
@@ -322,7 +344,10 @@
           <a href="#contact" class="btn-primary">Заказать сертификат</a>
         </div>
         <div class="gift-photo">
-          <img src="assets/photos/certificate.jpg" alt="Подарочный сертификат студии лазерной эпиляции LaserLive" loading="lazy">
+          <picture>
+            <source srcset="assets/photos/certificate.webp" type="image/webp">
+            <img src="assets/photos/certificate.jpg" alt="Подарочный сертификат студии лазерной эпиляции LaserLive" loading="lazy" width="1000" height="1333">
+          </picture>
         </div>
       </div>
     </div>
@@ -429,7 +454,7 @@
 
       <!-- КОМПЛЕКСЫ -->
       <div class="price-content" id="tab-complex">
-        <p class="section-sub" style="margin-bottom: 20px;">Выгодные пакетные предложения — экономия до 25% по сравнению с одиночными процедурами</p>
+        <p class="section-sub">Выгодные пакетные предложения — экономия до 25% по сравнению с одиночными процедурами</p>
         <div class="complex-grid">
           <div class="complex-card xs">
             <div class="complex-size">XS</div>
@@ -800,7 +825,7 @@
           <div class="calc-plan-desc" id="calcPlanDesc">Скидка −30% на любую первую процедуру в студии</div>
 
           <div class="calc-selected-list" id="calcSelectedList">
-            <div class="calc-empty">Выбери зоны слева</div>
+            <div class="calc-empty">Выбери нужные зоны</div>
           </div>
 
           <div class="calc-totals">
@@ -830,7 +855,7 @@
   </section>
 
   <!-- ============ ПОДАРОЧНЫЕ СЕРТИФИКАТЫ ============ -->
-  <section id="promo" class="reveal" style="padding-left: 0; padding-right: 0;">
+  <section id="promo" class="reveal">
     <div class="promo-section">
       <div class="section-label">Акции и скидки</div>
       <h2 class="section-title">Сэкономь <em>прямо сейчас</em></h2>
@@ -1012,28 +1037,28 @@
 
       <div class="faq-list">
         <div class="faq-item">
-          <div class="faq-q">Что такое лазерная эпиляция? <span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>Лазерная эпиляция — это современный метод удаления нежелательных волос с помощью лазерного излучения. Лазер воздействует на пигмент в волосе (меланин), нагревает фолликул и разрушает его. Постепенно волоски истончаются, светлеют и перестают расти. Метод безопасен, эффективен и подходит для большинства зон тела.</p></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-1">Что такое лазерная эпиляция? <span class="faq-icon">+</span></button>
+          <div class="faq-a" id="faq-a-1"><p>Лазерная эпиляция — это современный метод удаления нежелательных волос с помощью лазерного излучения. Лазер воздействует на пигмент в волосе (меланин), нагревает фолликул и разрушает его. Постепенно волоски истончаются, светлеют и перестают расти. Метод безопасен, эффективен и подходит для большинства зон тела.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Как подготовиться к процедуре? <span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>За 2-3 недели до сеанса исключите загар (солярий, солнце), не используйте автозагар. За 24 часа до процедуры побрейте зону станком — воск, шугаринг и эпилятор запрещены, нужны живые корни волос. В день процедуры не наносите крем, лосьон и парфюм на обрабатываемую зону.</p></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-2">Как подготовиться к процедуре? <span class="faq-icon">+</span></button>
+          <div class="faq-a" id="faq-a-2"><p>За 2-3 недели до сеанса исключите загар (солярий, солнце), не используйте автозагар. За 24 часа до процедуры побрейте зону станком — воск, шугаринг и эпилятор запрещены, нужны живые корни волос. В день процедуры не наносите крем, лосьон и парфюм на обрабатываемую зону.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Какие есть противопоказания? <span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>Беременность и кормление грудью, онкологические заболевания, эпилепсия, сахарный диабет в декомпенсации, кожные заболевания в зоне обработки (псориаз, экзема в обострении), свежий загар, варикоз в острой стадии, индивидуальная непереносимость. Полный список обсудим перед процедурой — приходите на бесплатную консультацию.</p></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-3">Какие есть противопоказания? <span class="faq-icon">+</span></button>
+          <div class="faq-a" id="faq-a-3"><p>Беременность и кормление грудью, онкологические заболевания, эпилепсия, сахарный диабет в декомпенсации, кожные заболевания в зоне обработки (псориаз, экзема в обострении), свежий загар, варикоз в острой стадии, индивидуальная непереносимость. Полный список обсудим перед процедурой — приходите на бесплатную консультацию.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Почему нужно несколько процедур? <span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>Волосы находятся на разных фазах роста: активный рост, переход и покой. Лазер эффективно воздействует только на волосы в активной фазе — это примерно 20-30% всех волос на теле в каждый момент. Поэтому для полного избавления от нежелательной растительности нужен курс из 6-10 процедур с интервалом 4-8 недель.</p></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-4">Почему нужно несколько процедур? <span class="faq-icon">+</span></button>
+          <div class="faq-a" id="faq-a-4"><p>Волосы находятся на разных фазах роста: активный рост, переход и покой. Лазер эффективно воздействует только на волосы в активной фазе — это примерно 20-30% всех волос на теле в каждый момент. Поэтому для полного избавления от нежелательной растительности нужен курс из 6-10 процедур с интервалом 4-8 недель.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Это больно? <span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>Нет. Современные диодные лазеры оснащены системой охлаждения, которая делает процедуру максимально комфортной. Большинство клиентов сравнивают ощущения с лёгким покалыванием или тёплым прикосновением. После восковой эпиляции и шугаринга лазер ощущается как отдых.</p></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-5">Это больно? <span class="faq-icon">+</span></button>
+          <div class="faq-a" id="faq-a-5"><p>Нет. Современные диодные лазеры оснащены системой охлаждения, которая делает процедуру максимально комфортной. Большинство клиентов сравнивают ощущения с лёгким покалыванием или тёплым прикосновением. После восковой эпиляции и шугаринга лазер ощущается как отдых.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Сколько длится одна процедура? <span class="faq-icon">+</span></div>
-          <div class="faq-a"><p>Зависит от зоны. Верхняя губа или подмышки — около 10 минут. Бикини или голени — 20-30 минут. Полная обработка ног — около 40-50 минут. Комплекс «ноги + бикини + подмышки» занимает примерно час.</p></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-6">Сколько длится одна процедура? <span class="faq-icon">+</span></button>
+          <div class="faq-a" id="faq-a-6"><p>Зависит от зоны. Верхняя губа или подмышки — около 10 минут. Бикини или голени — 20-30 минут. Полная обработка ног — около 40-50 минут. Комплекс «ноги + бикини + подмышки» занимает примерно час.</p></div>
         </div>
       </div>
     </div>
@@ -1113,9 +1138,8 @@
   </a>
 
   <!-- Скрипты — каждый отвечает за свой кусок логики -->
-  <script src="js/preloader.js"></script>
+  <script src="js/preloader.js" defer></script>
   <script src="js/utils.js" defer></script>
-  <script src="js/toast.js" defer></script>
   <script src="js/nav.js" defer></script>
   <script src="js/tabs.js" defer></script>
   <script src="js/faq.js" defer></script>

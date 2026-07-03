@@ -9,9 +9,9 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const blobs = [
-    { el: document.querySelector('.bg-blob.a'), scrollSpeed: 0.15, mouseFactor: 30 },
-    { el: document.querySelector('.bg-blob.b'), scrollSpeed: 0.25, mouseFactor: 50 },
-    { el: document.querySelector('.bg-blob.c'), scrollSpeed: 0.1,  mouseFactor: 20 },
+    { el: document.querySelector('.bg-blob-wrap.a'), scrollSpeed: 0.15, mouseFactor: 30 },
+    { el: document.querySelector('.bg-blob-wrap.b'), scrollSpeed: 0.25, mouseFactor: 50 },
+    { el: document.querySelector('.bg-blob-wrap.c'), scrollSpeed: 0.1,  mouseFactor: 20 },
   ].filter((b) => b.el);
 
   if (blobs.length === 0) return;

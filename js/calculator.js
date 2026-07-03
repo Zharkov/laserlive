@@ -1,6 +1,6 @@
 /**
  * CALCULATOR — плитки-карточки с иконками.
- * Клиент кликает по плиткам → видит итог справа → отправляется в MAX.
+ * Клиент кликает по плиткам → видит итог справа → отправляет заявку через модалку (Formspree).
  */
 (function () {
   'use strict';
@@ -65,7 +65,7 @@
 
     listEl.innerHTML = '';
     if (checked.length === 0) {
-      listEl.innerHTML = '<div class="calc-empty">Выбери зоны слева</div>';
+      listEl.innerHTML = '<div class="calc-empty">Выбери нужные зоны</div>';
     } else {
       checked.forEach((cb) => {
         const row = document.createElement('div');

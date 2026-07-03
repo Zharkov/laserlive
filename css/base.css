@@ -22,23 +22,35 @@ body {
     linear-gradient(180deg, var(--cream) 0%, #fff0f7 100%);
 }
 
-.bg-blob {
+/* Обёртка — фиксированная позиция и размер, transform двигает parallax.js
+   (scroll/mouse). Ничего своего не анимирует, чтобы не спорить с JS. */
+.bg-blob-wrap {
   position: fixed;
+  z-index: -1;
+  pointer-events: none;
+}
+.bg-blob-wrap.a { width: 500px; height: 500px; top: -10%;  left: -10%; }
+.bg-blob-wrap.b { width: 600px; height: 600px; top: 30%;   right: -15%; }
+.bg-blob-wrap.c { width: 450px; height: 450px; bottom: -10%; left: 20%; }
+
+/* Внутренний слой — цвет, блюр и «плавающая» CSS-анимация transform.
+   Отдельный элемент от обёртки, поэтому не конфликтует с parallax.js. */
+.bg-blob {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.5;
-  z-index: -1;
   animation: float 20s ease-in-out infinite;
-  pointer-events: none;
 }
-.bg-blob.a { width: 500px; height: 500px; top: -10%;  left: -10%;   background: var(--pink-300); }
-.bg-blob.b { width: 600px; height: 600px; top: 30%;   right: -15%;  background: var(--violet-400); animation-delay: -7s; }
-.bg-blob.c { width: 450px; height: 450px; bottom: -10%; left: 20%;  background: var(--peach-300); animation-delay: -14s; }
+.bg-blob-wrap.a .bg-blob { background: var(--pink-300); }
+.bg-blob-wrap.b .bg-blob { background: var(--violet-400); animation-delay: -7s; }
+.bg-blob-wrap.c .bg-blob { background: var(--peach-300); animation-delay: -14s; }
 
 @media (max-width: 768px) {
-  .bg-blob.a { width: 280px; height: 280px; }
-  .bg-blob.b { width: 320px; height: 320px; }
-  .bg-blob.c { width: 240px; height: 240px; }
+  .bg-blob-wrap.a { width: 280px; height: 280px; }
+  .bg-blob-wrap.b { width: 320px; height: 320px; }
+  .bg-blob-wrap.c { width: 240px; height: 240px; }
 }
 
 /* Общий контейнер */

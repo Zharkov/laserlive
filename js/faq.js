@@ -8,7 +8,8 @@
 
   questions.forEach((q) => {
     q.addEventListener('click', () => {
-      q.parentElement.classList.toggle('open');
+      const isOpen = q.parentElement.classList.toggle('open');
+      q.setAttribute('aria-expanded', String(isOpen));
     });
   });
 })();

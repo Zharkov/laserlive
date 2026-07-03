@@ -97,6 +97,7 @@
       // Очищаем canvas из DOM чтобы не висел зря
       setTimeout(() => {
         if (canvas && particles.length === 0) {
+          window.removeEventListener('resize', resize);
           canvas.remove();
           canvas = null;
           ctx = null;
