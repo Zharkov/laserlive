@@ -296,6 +296,7 @@
 .complex-card.s  { background: linear-gradient(135deg, var(--pink-400), var(--pink-600)); }
 .complex-card.m  { background: linear-gradient(135deg, var(--violet-400), var(--pink-500)); }
 .complex-card.l  { background: linear-gradient(135deg, var(--violet-500), var(--coral-400)); }
+.complex-card.xl { background: linear-gradient(135deg, #6d3fc0, var(--violet-500)); }
 
 .complex-size {
   font-family: var(--font-display);
